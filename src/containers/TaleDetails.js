@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Col, Container, Row, Form, Button, Badge, Collapse } from "react-bootstrap";
+import { Col, Container, Row, Form, Button, Badge } from "react-bootstrap";
 import { TaleActions } from "../actions/TaleActions";
 import LoadingDialog from "../components/LoadingDialog";
 import Loading from "../components/Loading";
@@ -188,7 +188,7 @@ export default class TaleDetails extends Component {
           <Col md={8}>
             <Row>
               <Col md={4}>
-                <img src={this.transferFeaturedImg(tale.featuredImg)} alt=""></img>
+                <img src={DefaultFeaturedImg} alt=""></img>
               </Col>
               <Col md={8} className="px-5">
                 <ul className="list-unstyled">

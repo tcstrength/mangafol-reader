@@ -1,4 +1,4 @@
-const apiCalls = require("./../utils/ApiCalls");
+const apiCalls = require("./ApiCalls");
 const API = apiCalls.instance;
 const PREFIX = "/tale";
 const PAGING = `${PREFIX}/paging`;

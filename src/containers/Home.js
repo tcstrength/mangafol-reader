@@ -11,12 +11,12 @@ class Home extends Component {
           <Banner></Banner>
         </Row>
         <Row className="mt-5">
-          <Col md={9}>
+          <Col md={8}>
             <Row>
               <TaleList></TaleList>
             </Row>
           </Col>
-          <Col md={3}></Col>
+          <Col md={4}></Col>
         </Row>
       </Container>
     );

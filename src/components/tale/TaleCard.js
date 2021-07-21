@@ -28,27 +28,29 @@ class TaleCard extends Component {
     var { tale } = this.state;
 
     return (
-      <Card>
-        <Card.Img variant="top" className="embed-responsive-item" src={this.transferFeaturedImg(tale.featuredImg)} />
-        <Card.Body>
-          <Card.Title>{tale.title}</Card.Title>
-          <Row>
-            <Col md={6}>
-              <Card.Text className="text-secondary">
-                Chương {tale.chapter}
-              </Card.Text>
-            </Col>
-            <Col md={6}>
-              <Card.Text className="">
-              </Card.Text>
-            </Col>
-          </Row>
+      <a href={`/tales/${tale.id}`} style={{ color: "inherit", textDecoration: "none" }}>
+        <Card className="p-0 mb-3">
+          <Card.Img height="300px" style={{ objectFit: "cover" }} variant="top" className="embed-responsive-item" src={this.transferFeaturedImg(tale.featuredImg)} />
+          <Card.Body>
+            <Card.Title style={{ textTransform: "capitalize" }}>{tale.title}</Card.Title>
+            <Row>
+              <Col md={6}>
+                <Card.Text className="text-secondary">
+                  Chương {tale.chapter}
+                </Card.Text>
+              </Col>
+              <Col md={6}>
+                <Card.Text className="">
+                </Card.Text>
+              </Col>
+            </Row>
 
-          <Card.Text >
-            {this.transferDescription(tale.description)}
-          </Card.Text>
-        </Card.Body>
-      </Card>
+            <Card.Text >
+              {this.transferDescription(tale.description)}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </a>
     );
   }
 }
