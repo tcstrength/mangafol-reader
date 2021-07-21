@@ -45,9 +45,12 @@ class Banner extends Component {
   }
   render() {
     return (
-      <Carousel>
-        {this.renderItems(this.state.banners)}
-      </Carousel>
+      <div>
+
+      </div>
+      // <Carousel>
+      //   {this.renderItems(this.state.banners)}
+      // </Carousel>
     );
   }
 }

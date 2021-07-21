@@ -3,9 +3,65 @@ import { Nav, Navbar, Container, FormControl, InputGroup } from "react-bootstrap
 import ReactLogo from "../logo.svg";
 import UserAvatar from "../resources/user.svg";
 import SearchIcon from "../resources/search.svg";
+import { UserActions } from "../actions/UserActions";
+const apiCalls = require("../actions/ApiCalls");
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      login: false,
+      me: null
+    }
+  }
+
+  componentDidMount() {
+    const profile = apiCalls.userProfile;
+
+    if (profile !== null) {
+      this.setState({ login: true, me: profile })
+    } else {
+      const promise = UserActions.me();
+      promise.then((resp) => {
+        const profile = resp.data.content;
+        this.setState({
+          login: true,
+          me: profile
+        })
+
+        apiCalls.setUserProfile(profile);
+      }).catch((resp) => {
+        console.log("Redirect to login page");
+      })
+    }
+  }
+
   render() {
+    const { login, me } = this.state;
+
+    var profile = (
+      <>
+        <Nav.Link href="/login" className="d-flex">
+          Đăng nhập
+        </Nav.Link>
+        <Nav.Link href="/register" className="d-flex">
+          Đăng ký
+        </Nav.Link>
+      </>
+    )
+
+    if (login) {
+      var fullName = `${me.lastName} ${me.firstName}`;
+      profile = (
+        <Nav.Link href="/profile" className="d-flex">
+          <img
+            alt="User Avatar" src={UserAvatar} width="24" height="24" className="mx-1" />
+          {fullName}
+        </Nav.Link>
+      )
+    }
+
     return (
       <Navbar collapseOnSelect className="shadow-lg rounded" expand="lg" bg="light" variant="light" sticky="top">
         <Container>
@@ -17,18 +73,12 @@ class Header extends Component {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="/tales">Quản lý truyện</Nav.Link>
-              {/* <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown> */}
+              <Nav.Link href="/tales">Chia sẻ truyện</Nav.Link>
+              <Nav.Link href="/posts">Bài viết</Nav.Link>
             </Nav>
             <Nav>
               <InputGroup size="sm">
-                <FormControl type="text" placeholder="Tìm truyện" className="mr-2" />
+                <FormControl type="text" placeholder="Tìm truyện" className="mr-5" />
                 <InputGroup.Text><img
                   alt="" src={SearchIcon} width="16" height="16" className="d-inline-block align-middle" />
                   {' '}
@@ -36,12 +86,7 @@ class Header extends Component {
               </InputGroup>
             </Nav>
             <Nav>
-              <Nav.Link href="/profile">
-                <img
-                  alt="User Avatar" src={UserAvatar} width="30" height="30" className="d-inline-block align-middle" />
-                {' '}
-                Thái Chí Cường
-              </Nav.Link>
+              {profile}
             </Nav>
           </Navbar.Collapse>
         </Container>

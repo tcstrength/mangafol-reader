@@ -6,6 +6,9 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import Tales from "./Tales";
+import Logout from "./Logout";
+import TaleDetails from "./TaleDetails";
+import TaleEdit from "./TaleEdit";
 
 class App extends Component {
   render() {
@@ -16,21 +19,16 @@ class App extends Component {
 
           <div className="content">
             <Switch>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Register />
-              </Route>
-              <Route path="/tales">
-                <Tales />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
+
+              <Route path="/login" component={Login} />
+              <Route path="/register" component={Register} />
+              <Route path="/logout" component={Logout} />
+              <Route path="/tales/:id/edit" component={TaleEdit} />
+              <Route path="/tales/:id" component={TaleDetails} />
+              <Route path="/tales" component={Tales} />
+              <Route path="/" component={Home} />
             </Switch>
           </div>
-
           <Footer></Footer>
         </div>
       </Router>

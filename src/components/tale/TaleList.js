@@ -1,12 +1,13 @@
 import { Component } from "react";
 import { TaleActions } from "../../actions/TaleActions"
-import Tale from "./Tale";
+import TaleCard from "./TaleCard";
+import LoadingDialog from "../LoadingDialog";
 
 class TaleList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loaded: false,
+      loading: true,
       list: [],
       offset: 0,
       limit: 10
@@ -20,29 +21,31 @@ class TaleList extends Component {
     promise.then((resp) => {
       this.setState({
         list: resp.data.content.list,
-        loaded: true
+        loading: false
       })
     }).catch((error) => {
-
+      this.setState({
+        loading: false
+      })
     })
   }
 
   renderTales(list) {
     const listItems = list.map((item) =>
-      <Tale tale={item}></Tale>
+      <TaleCard tale={item}></TaleCard>
     )
 
     return listItems;
   }
 
   render() {
-    const { loaded, list, offset, limit } = this.state;
-
-    if (!this.state.loaded) {
-      return <p>Loading...</p>;
-    } else {
-      return this.renderTales(list);
-    }
+    const { list } = this.state;
+    return (
+      <>
+        <LoadingDialog show={this.state.loading}></LoadingDialog>
+        {this.renderTales(list)}
+      </>
+    )
   }
 }
 

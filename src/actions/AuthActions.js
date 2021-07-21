@@ -2,6 +2,7 @@ const apiCalls = require("./ApiCalls")
 const API = apiCalls.instance
 const PREFIX = "/auth";
 const LOGIN = `${PREFIX}/login`
+const REGISTER = `${PREFIX}/register`
 
 export const AuthActions = {
   login: async (uname, passwd) => {
@@ -19,9 +20,33 @@ export const AuthActions = {
       apiCalls.setRefreshToken(refreshToken);
       status = true;
     } catch (error) {
-      console.log(error.response.data.error);
+      console.log(error.response);
     }
 
     return status;
+  },
+  register: async (uname, passwd, firstName, lastName) => {
+    var status = false;
+
+    try {
+      const resp = await API.post(REGISTER, {
+        uname: uname,
+        passwd: passwd,
+        firstName: firstName,
+        lastName: lastName
+      })
+
+      console.log(resp);
+      status = true;
+    } catch (error) {
+      console.log(error.response);
+    }
+
+    return status;
+  },
+  clear: () => {
+    apiCalls.setUserProfile(null);
+    apiCalls.setAccessToken(null);
+    apiCalls.setRefreshToken(null);
   }
 }

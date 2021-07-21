@@ -10,10 +10,21 @@ const instance = axios.create({
   }
 });
 
+function getUserProfile() {
+  try {
+    return JSON.parse(localStorage.getItem('userProfile'))
+  } catch (error) {
+    return null;
+  }
+}
+
 module.exports = {
   instance: instance,
+  userProfile: getUserProfile(),
+  setUserProfile: (profile) => localStorage.setItem('userProfile', JSON.stringify(profile)),
+  bearerToken: `Bearer ${localStorage.getItem('accessToken')}`,
   accessToken: localStorage.getItem('accessToken'),
-  refreshToken: localStorage.getItem('refreshToken'),
   setAccessToken: (token) => localStorage.setItem('accessToken', token),
+  refreshToken: localStorage.getItem('refreshToken'),
   setRefreshToken: (token) => localStorage.setItem('refreshToken', token),
 }
