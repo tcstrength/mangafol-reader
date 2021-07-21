@@ -1,7 +1,7 @@
 const apiCalls = require("./ApiCalls")
 const API = apiCalls.instance
 const PREFIX = "/user";
-const ME = `${PREFIX}/me`
+const ME = `${PREFIX}/me`;
 
 export const UserActions = {
   me: async () => {

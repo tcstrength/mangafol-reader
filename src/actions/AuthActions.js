@@ -1,5 +1,5 @@
-const apiCalls = require("./ApiCalls")
-const API = apiCalls.instance
+const apiCalls = require("./../utils/ApiCalls");
+const API = apiCalls.instance;
 const PREFIX = "/auth";
 const LOGIN = `${PREFIX}/login`
 const REGISTER = `${PREFIX}/register`
@@ -11,8 +11,8 @@ export const AuthActions = {
     try {
       const resp = await API.post(LOGIN, {
         uname: uname,
-        passwd: passwd
-      })
+        passwd: passwd,
+      });
 
       console.log(resp);
       const { accessToken, refreshToken } = resp.data.content
