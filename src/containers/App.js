@@ -1,38 +1,24 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 
 import { Component } from "react";
-import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Home from "./Home";
-import Login from "./Login";
-import Register from "./Register";
-import Tales from "./Tales";
-import Logout from "./Logout";
-import TaleDetails from "./TaleDetails";
-import TaleEdit from "./TaleEdit";
+import { Container } from "react-bootstrap";
 
-class App extends Component {
+export default class App extends Component {
   render() {
     return (
       <Router>
         <div className="app">
           <Header></Header>
-          <div className="content">
+          <Container className="mt-5">
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
               <Route path="/logout" component={Logout} />
-              <Route path="/tales/:id/edit" component={TaleEdit} />
-              <Route path="/tales/:id" component={TaleDetails} />
-              <Route path="/tales" component={Tales} />
-              <Route path="/" component={Home} />
             </Switch>
-          </div>
-          <Footer></Footer>
+          </Container>
         </div>
       </Router>
     )
   }
 }
-
-export default App;

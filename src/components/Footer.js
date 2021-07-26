@@ -1,11 +1,7 @@
 import { Component } from "react";
 
-class Footer extends Component {
-  render() {
-    return (
-      <p></p>
-    );
-  }
+function Footer(props) {
+  return <p>Footer</p>
 }
 
 export default Footer;
