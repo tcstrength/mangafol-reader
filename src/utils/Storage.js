@@ -1,0 +1,5 @@
+export default accessToken = localStorage.getItem("accessToken")
+export default userProfile = JSON.parse(localStorage.getItem("userProfile"))
+export default setAccessToken(token) = localStorage.setItem("accessToken", token)
+export default setUserProfile(profile) = localStorage.setItem("userProfile", token)
+export default clearAll() = localStorage.clearAll()
