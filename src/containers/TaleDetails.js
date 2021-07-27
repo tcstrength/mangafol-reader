@@ -34,7 +34,7 @@ export default class TaleDetails extends Component {
   }
 
   componentDidMount() {
-    this.refreshTale()
+    this.refreshTale(true)
     this.updateTopList()
   }
 
@@ -46,17 +46,19 @@ export default class TaleDetails extends Component {
     })
   }
 
-  refreshTale() {
+  refreshTale(wantRefreshNotes) {
     const promise = TaleActions.getBySlug(this.state.slug);
     promise.then((resp) => {
       this.setState({ loading: false, failure: false, tale: resp.data.content })
-      this.refreshNotes(false);
+      if (wantRefreshNotes) {
+        this.refreshNotes(false);
+      }
     }).catch((resp) => {
       this.setState({ loading: false, failure: true })
     })
   }
 
-  refreshNotes(wantRefreshTale) {
+  refreshNotes() {
     const promise = TaleActions.getNotes(this.state.tale.id, 0, 100)
     promise.then((resp) => {
       this.setState({ notesList: resp.data.content.list })
@@ -161,7 +163,8 @@ export default class TaleDetails extends Component {
 
   onNotesCompleted = (e) => {
     this.setState({ updating: false })
-    this.refreshNotes(true);
+    this.refreshNotes();
+    this.refreshTale(false);
   }
 
   render() {
