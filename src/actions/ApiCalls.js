@@ -10,6 +10,20 @@ export const api = axios.create({
   },
 });
 
+api.interceptors.response.use(
+  function (response) {
+    return response;
+  },
+
+  function (error) {
+    if (error.response.status === 401) {
+      window.location.href = "/login"
+    }
+
+    return Promise.reject(error);
+  }
+);
+
 export const accessToken = localStorage.getItem("accessToken")
 export const bearerToken = "Bearer " + accessToken
 export const authHeader = { "Authorization": bearerToken }
@@ -29,7 +43,7 @@ export const Store = {
 export const AuthActions = {
   login: async (body) => api.post("/auth/login", body),
   register: async (body) => api.post("/auth/register", body),
-  logout: () => localStorage.clearAll()
+  logout: () => localStorage.clear()
 }
 
 export const TaleActions = {

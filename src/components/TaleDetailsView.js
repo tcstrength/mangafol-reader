@@ -155,7 +155,7 @@ function TaleDetailsView(props) {
               </div>
             </li>
 
-            <li>
+            <li key="timeSince">
               <small className="text-muted">{timeSince(tale.ct)}</small>
             </li>
 
