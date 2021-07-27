@@ -1,33 +1,26 @@
-import { Component } from "react";
 import { Nav, Navbar, Container, FormControl, InputGroup } from "react-bootstrap";
-import { getUserProfile } from "../utils/Storage";
-import ReactLogo from "../logo.svg";
-import UserAvatar from "../resources/user.svg";
-import SearchIcon from "../resources/search.svg";
+import { Store } from "../actions/ApiCalls";
+import { logo, search } from "../constants/Images";
 
 function Header(props) {
-  var user = getUserProfile();
-  if (user === null) {
-    var profile = (
-      <>
-        <Nav.Link href="/login" className="d-flex">
-          Đăng nhập
-        </Nav.Link>
-        <Nav.Link href="/register" className="d-flex">
-          Đăng ký
-        </Nav.Link>
-      </>
-    )
-  } else {
-
-  }
+  var user = Store.userProfile;
+  var profile = (
+    <>
+      <Nav.Link href="/login" className="d-flex">
+        Đăng nhập
+      </Nav.Link>
+      <Nav.Link href="/register" className="d-flex">
+        Đăng ký
+      </Nav.Link>
+    </>
+  )
 
   return (
     <Navbar collapseOnSelect className="shadow-lg rounded" expand="lg" bg="light" variant="light" sticky="top">
       <Container>
         <Navbar.Brand href="/">
           <img
-            alt="Mangafol Logo" src={ReactLogo} width="30" height="30" className="d-inline-block align-top" />
+            alt="Mangafol Logo" src={logo} width="30" height="30" className="d-inline-block align-top" />
           {' '} Mangafol
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -37,10 +30,10 @@ function Header(props) {
             <Nav.Link href="/posts">Bài viết</Nav.Link>
           </Nav>
           <Nav>
-            <InputGroup size="sm">
-              <FormControl type="text" placeholder="Tìm truyện" className="mr-5" />
+            <InputGroup size="sm mr-3">
+              <FormControl type="text" placeholder="Tìm truyện" />
               <InputGroup.Text><img
-                alt="" src={SearchIcon} width="16" height="16" className="d-inline-block align-middle" />
+                alt="" src={search} width="16" height="16" className="d-inline-block align-middle" />
                 {' '}
               </InputGroup.Text>
             </InputGroup>

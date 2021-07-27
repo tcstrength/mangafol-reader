@@ -2,16 +2,16 @@ import { Modal } from "react-bootstrap";
 import Loading from "./Loading";
 
 function LoadingDialog(props) {
-  console.log(props)
   return (
     <Modal
       {...props}
+      show={props.loading}
       backdrop="static"
       size="sm"
       aria-labelledby="contained-modal-title-vcenter"
       centered>
       <Modal.Body className="text-center">
-        <Loading></Loading>
+        <Loading size="md" />
         <p></p>
         <h3>Đang tải dữ liệu</h3>
         <p></p>

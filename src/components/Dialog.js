@@ -7,21 +7,28 @@ function Dialog(props) {
   const { type, title, content, plink, slink, ptext, stext } = props;
 
   var imgSrc = SuccessImg;
+  var pVariant = "primary";
+  var sVariant = "secondary";
+
   if (type === 'warning') {
     imgSrc = WarningImg;
+    pVariant = "warning";
+    sVariant = "primary";
   } else if (type === 'error') {
     imgSrc = ErrorImg;
+    pVariant = "success";
+    sVariant = "primary";
   }
 
-  var sbtn = <a href={slink} className="btn btn-md btn-secondary w-100">{stext}</a>
-  var pbtn = <a href={plink} className="btn btn-md btn-primary w-100">{ptext}</a>
+  var sbtn = <a href={slink} className={`btn btn-md btn-${sVariant} w-100`}>{stext}</a>
+  var pbtn = <a href={plink} className={`btn btn-md btn-${pVariant} w-100`}>{ptext}</a>
 
   if (plink === '') {
-    pbtn = <Button variant="primary" className="w-100" onClick={props.onHide}>{stext}</Button>
+    pbtn = <Button variant={pVariant} className="w-100" onClick={props.onHide}>{ptext}</Button>
   }
 
   if (slink === '') {
-    sbtn = <Button variant="secondary" className="w-100" onClick={props.onHide}>{stext}</Button>
+    sbtn = <Button variant={sVariant} className="w-100" onClick={props.onHide}>{stext}</Button>
   }
 
   return (

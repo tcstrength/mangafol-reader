@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { Container, Form, Button, Card } from "react-bootstrap";
 import LoginImage from "../resources/image.png";
-import { AuthActions } from "../actions/AuthActions";
 import Dialog from "../components/Dialog";
 import Loading from "../components/Loading";
 
@@ -23,15 +22,6 @@ export default class Register extends Component {
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({ loading: true })
-    const { uname, passwd, firstName, lastName } = this.state;
-    const result = await AuthActions.register(uname, passwd, firstName, lastName);
-
-    if (result) {
-      this.setState({ success: true })
-    } else {
-      this.setState({ failure: true })
-    }
-    this.setState({ loading: false })
   }
 
   renderSuccessDialog() {

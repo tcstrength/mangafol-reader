@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Container, Form, Button, Card } from "react-bootstrap";
+import { AuthActions, Store } from "../actions/ApiCalls";
 import LoginImage from "../resources/image.png";
-import { AuthActions } from "../actions/AuthActions";
 import Dialog from "../components/Dialog";
 import Loading from "../components/Loading";
 
@@ -21,17 +21,19 @@ export default class Login extends Component {
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({ loading: true });
-    const { uname, passwd } = this.state;
-    const result = await AuthActions.login(uname, passwd);
-
-
-    if (result) {
-      this.setState({ success: true })
-    } else {
-      this.setState({ failure: true })
+    const body = {
+      uname: this.state.uname,
+      passwd: this.state.passwd
     }
 
-    this.setState({ loading: false })
+    const promise = AuthActions.login(body);
+    promise.then((resp) => {
+      const accessToken = resp.data.content.accessToken;
+      Store.setAccessToken(accessToken)
+      this.setState({ loading: false, success: true })
+    }).catch((resp) => {
+      this.setState({ loading: false, failure: true })
+    })
   }
 
   renderSuccessDialog() {
