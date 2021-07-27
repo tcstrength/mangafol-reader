@@ -9,6 +9,7 @@ import TaleUploadDialog from "../components/TaleUploadDialog";
 import TaleRatingDialog from "../components/TaleRatingDialog";
 import TaleNotesDialog from "../components/TaleNotesDialog";
 import TaleNotesView from "../components/TaleNotesView";
+import TaleSideCardList from "../components/TaleSideCardList";
 import { throttle } from 'throttle-debounce';
 import { useHistory } from "react-router-dom";
 
@@ -19,6 +20,7 @@ export default class TaleDetails extends Component {
     this.state = {
       slug: props.match.params.slug,
       notesList: [],
+      topList: [],
       loading: true,
       updating: false,
       failure: false,
@@ -33,6 +35,15 @@ export default class TaleDetails extends Component {
 
   componentDidMount() {
     this.refreshTale()
+    this.updateTopList()
+  }
+
+  updateTopList() {
+    const promise = TaleActions.top(10);
+    promise.then((resp) => {
+      this.setState({ topList: resp.data.content.list, loading: false })
+    }).catch((resp) => {
+    })
   }
 
   refreshTale() {
@@ -49,9 +60,6 @@ export default class TaleDetails extends Component {
     const promise = TaleActions.getNotes(this.state.tale.id, 0, 100)
     promise.then((resp) => {
       this.setState({ notesList: resp.data.content.list })
-      if (wantRefreshTale) {
-        this.refreshTale()
-      }
     })
   }
 
@@ -98,17 +106,17 @@ export default class TaleDetails extends Component {
     })
   }
 
-  onAdvanceUpdate = () => {
-    this.updateTale('Cập nhật nâng cao', this.state.tale);
+  onAdvanceUpdate = (tale) => {
+    this.updateTale('Cập nhật nâng cao', tale);
   }
 
   onAdvanceDelete = () => {
     const promise = TaleActions.delete(this.state.tale.id)
+    this.setState({ updating: true })
     promise.then((resp) => {
       console.log(resp);
+      this.props.history.push('/')
     })
-
-    this.props.history.push('/')
   }
 
   onUploadClick = (e) => {
@@ -152,6 +160,7 @@ export default class TaleDetails extends Component {
   }
 
   onNotesCompleted = (e) => {
+    this.setState({ updating: false })
     this.refreshNotes(true);
   }
 
@@ -172,7 +181,7 @@ export default class TaleDetails extends Component {
         <LoadingDialog show={this.state.loading} />
 
         <Col md={8}>
-          {!this.state.loading &&
+          {(this.state.tale !== null && this.state.tale !== undefined) &&
             <>
               <TaleRatingDialog
                 tale={this.state.tale}
@@ -186,17 +195,17 @@ export default class TaleDetails extends Component {
               <TaleNotesDialog
                 tale={this.state.tale}
                 show={this.state.notesShow}
+                onNotesUpdating={() => { this.setState({ updating: true }) }}
                 onNotesCompleted={this.onNotesCompleted}
                 onHide={() => { this.setState({ notesShow: false }) }}
               />
 
-              {/* <TaleAdvanceDialog
+              <TaleAdvanceDialog
                 onHide={() => { this.setState({ advanceShow: false }) }}
-                onRatingChange={this.onRatingChange}
                 onUpdate={this.onAdvanceUpdate}
                 onDelete={this.onAdvanceDelete}
                 show={this.state.advanceShow}
-                tale={this.state.tale} /> */}
+                tale={this.state.tale} />
 
               <TaleUploadDialog
                 onHide={() => { this.setState({ uploadShow: false }) }}
@@ -217,13 +226,18 @@ export default class TaleDetails extends Component {
               />
 
               <TaleNotesView
+                onNotesUpdating={() => { this.setState({ updating: true }) }}
                 onNotesCompleted={this.onNotesCompleted}
                 list={this.state.notesList} />
             </>
           }
         </Col>
         <Col md={4}>
-
+          <TaleSideCardList
+            variant="danger"
+            title="Truyện hay"
+            list={this.state.topList}
+          />
         </Col>
       </Row>
     )

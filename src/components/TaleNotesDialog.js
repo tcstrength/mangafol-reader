@@ -13,6 +13,7 @@ function TaleNotesDialog(props) {
 
   const postNotes = () => {
     console.log(notes)
+    props.onNotesUpdating()
     const promise = TaleActions.addNotes(notes)
     promise.then((resp) => {
       console.log(resp.data.content)
