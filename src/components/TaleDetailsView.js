@@ -6,15 +6,20 @@ import FlagIcon from "../resources/flag.svg";
 import BookIcon from "../resources/book.svg";
 import PlayIcon from "../resources/play.svg";
 import RatingIcon from "../resources/rating.svg";
-import { ReactComponent as LinkIcon } from "../resources/foreign.svg";
+import Dialog from "./Dialog";
+import { ReactComponent as RatingIcon2 } from "../resources/rating.svg";
+import { ReactComponent as SendIcon } from "../resources/send.svg";
 import { ReactComponent as NotesIcon } from "../resources/notes.svg";
+import { ReactComponent as ShareIcon } from "../resources/share.svg";
 import Loading from "./Loading";
 import { timeSince } from "../utils/DateUtils";
-
+import { useState } from "react";
 
 function TaleDetailsView(props) {
   const tale = props.tale;
   const pt = "pt-3";
+
+  const [showLinkGuid, setShowLinkGuid] = useState(false)
 
   const transferDescription = (description) => {
     if (description === '') {
@@ -117,8 +122,23 @@ function TaleDetailsView(props) {
     )
   }
 
+  var readNowBtn = <a href={tale.linkDisplay} className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
+
+  if (tale.linkDisplay === '') {
+    readNowBtn = <a href="javascript:void(0)" onClick={() => { setShowLinkGuid(true) }} className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
+  }
+
   return (
     <>
+      <Dialog show={showLinkGuid}
+        onHide={() => { setShowLinkGuid(false) }}
+        title="Chưa có link pattern"
+        content="Ấn vào nút Nâng cao, sau đó cập nhật Link patter"
+        stext="Trang chủ"
+        slink="/"
+        ptext="Đã hiểu"
+        plink=""
+      />
       <Row>
         <Col md={4}>
           <img
@@ -129,7 +149,7 @@ function TaleDetailsView(props) {
         <Col md={8} className="px-5">
           <ul className="list-unstyled">
             <li key="title" className="d-flex align-items-center">
-              <h4 className="pr-3" style={{ textTransform: "capitalize" }}>{tale.title}</h4>
+              <h4 className="pr-3 mb-0" style={{ textTransform: "capitalize" }}>{tale.title}</h4>
               <div className="pb-1">
                 {props.updating && <Loading size="sm" />}
               </div>
@@ -149,10 +169,10 @@ function TaleDetailsView(props) {
         </Col>
       </Row >
       <ButtonGroup className="pt-3 w-100" aria-label="Tale Controls">
-        <a href={tale.linkDisplay} className="btn btn-primary"><LinkIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
-        <Button variant="secondary" onClick={props.onRatingClick}>Đánh giá</Button>
+        {readNowBtn}
         <Button variant="secondary" onClick={props.onNotesClick}><NotesIcon className="mb-1" fill="#FFF" width="16" height="16" /> Ghi chú</Button>
-        <Button variant="secondary" onClick={props.onShareClick}>Chia sẻ</Button>
+        <Button variant="secondary" onClick={props.onRatingClick}><RatingIcon2 className="mb-1" fill="#FFF" width="16" height="16" /> Đánh giá</Button>
+        <Button variant="secondary" onClick={props.onShareClick}><ShareIcon className="mb-1" fill="#FFF" width="16" height="16" /> Chia sẻ</Button>
         <Button variant="secondary" onClick={props.onUploadClick}>Đổi ảnh</Button>
         <Button variant="warning" onClick={props.onAdvanceClick}>Nâng cao</Button>
       </ButtonGroup>

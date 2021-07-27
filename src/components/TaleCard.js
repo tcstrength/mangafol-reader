@@ -94,8 +94,8 @@ function TaleCard(props) {
           </Card.Text>
         </Card.Body>
       </a>
-      <Card.Footer>
-        <ButtonGroup className="w-100" aria-label="Tale Controls">
+      <Card.Footer className="px-1 py-1">
+        <ButtonGroup className="w-100 " aria-label="Tale Controls">
           {readButton}
         </ButtonGroup>
       </Card.Footer>

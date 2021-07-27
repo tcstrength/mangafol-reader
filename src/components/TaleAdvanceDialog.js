@@ -1,8 +1,15 @@
 import { Modal, Button, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
+import { useState } from "react";
 import StarRatings from "react-star-ratings";
 
+/**
+ * onUpdate
+ * onDelete
+ * @param {*} props 
+ * @returns 
+ */
 function TaleAdvanceDialog(props) {
-  const { tale } = props;
+  const [tale, setTale] = useState(props.tale)
 
   const finishedRadios = [
     { name: 'Đang tiến hành', value: 'false', variant: 'outline-primary' },
@@ -28,18 +35,18 @@ function TaleAdvanceDialog(props) {
           <p className="pt-2"></p>
           <Form.Group className="mb-3" controlId="title">
             <Form.Control required type="text" placeholder="Tên truyện" value={tale.title}
-              onChange={props.onTitleChange} />
+              onChange={(e) => { setTale({ ...tale, title: e.target.value }) }} />
           </Form.Group>
 
           <Form.Group className="mb-3 d-flex" controlId="author">
             <Form.Control required style={{ marginRight: "6px" }} type="text" placeholder="Tác giả" value={tale.author}
-              onChange={props.onAuthorChange} />
+              onChange={(e) => { setTale({ ...tale, author: e.target.value }) }} />
             <Form.Control
               style={{ marginLeft: "6px" }}
               type="number"
               size="sm"
               value={tale.chapter}
-              onChange={props.onChapterChange} />
+              onChange={(e) => { setTale({ ...tale, chapter: e.target.value }) }} />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="finished">
@@ -54,7 +61,7 @@ function TaleAdvanceDialog(props) {
                   name="radio"
                   value={radio.value}
                   checked={radio.value === tale.taleFinished.toString()}
-                  onChange={props.onFinishedChange}
+                  onChange={(e) => { setTale({ ...tale, taleFinished: e.target.value === 'true' }) }}
                 >
                   {radio.name}
                 </ToggleButton>
@@ -74,7 +81,7 @@ function TaleAdvanceDialog(props) {
                   name="radio"
                   value={radio.value}
                   checked={radio.value === tale.readingStatus.toString()}
-                  onChange={props.onReadingStatusChange}
+                  onChange={(e) => { setTale({ ...tale, readingStatus: e.target.value }) }}
                 >
                   {radio.name}
                 </ToggleButton>
@@ -82,31 +89,11 @@ function TaleAdvanceDialog(props) {
             </ButtonGroup>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="linkPattern">
+          <Form.Group controlId="linkPattern">
             <Form.Control required type="text" as="textarea"
               style={{ resize: "none" }} rows={2}
-              placeholder="Ví dụ: https://example.com/{{chapter}}" value={tale.linkPattern}
-              onChange={props.onLinkPatternChange} />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="featuredImg">
-            <Form.Control type="file" className="form-control" style={{ content: "Chọn ảnh" }} name="image"
-              accept="image/png, image/gif, image/jpeg"
-              onChange={props.onFileChange} />
-          </Form.Group>
-
-          <StarRatings
-            rating={tale.rating}
-            starDimension="28px"
-            starRatedColor="#fcc603"
-            changeRating={props.onRatingChange}
-            numberOfStars={10}
-            starHoverColor="#fcc603"
-            name='rating'
-          />
-          <p></p>
-          <Form.Group controlId="review">
-            <Form.Control as="textarea" style={{ resize: "none" }} rows={3} placeholder="Mô tả về bộ truyện này" value={tale.description}
-              onChange={props.onDescriptionChange} />
+              placeholder="Link pattern, ví dụ: https://example.com/{{chapter}}" value={tale.linkPattern}
+              onChange={(e) => { setTale({ ...tale, linkPattern: e.target.value }) }} />
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -115,7 +102,7 @@ function TaleAdvanceDialog(props) {
               <Button variant="danger" className="w-100" onClick={() => { props.onHide(); props.onDelete() }}>Xoá</Button>
             </div>
             <div className="col-6">
-              <Button variant="primary" className="w-100" onClick={() => { props.onHide(); props.onUpdate() }}>Cập nhật</Button>
+              <Button variant="primary" className="w-100" onClick={() => { props.onHide(); props.onUpdate(tale) }}>Cập nhật</Button>
             </div>
             <div className="col-3 p-0 m-0">
               <Button variant="secondary" className="w-100" onClick={props.onHide}>Xem lại</Button>

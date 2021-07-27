@@ -96,7 +96,11 @@ export default class Home extends Component {
           </div>
         </Col>
         <Col md={4}>
-          <TaleSideCardList list={this.state.topList} />
+          <TaleSideCardList
+            variant="danger"
+            title="Truyện hay"
+            list={this.state.topList}
+          />
         </Col>
       </Row>
     );
