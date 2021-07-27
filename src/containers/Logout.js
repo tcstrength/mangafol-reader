@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Container } from "react-bootstrap";
-import { logout } from "../actions/ApiCalls";
+import { AuthActions } from "../actions/ApiCalls";
 import Dialog from "../components/Dialog";
 
 export default class Logout extends Component {
@@ -10,7 +10,7 @@ export default class Logout extends Component {
       show: true
     }
 
-    clearAll();
+    AuthActions.logout();
   }
 
   render() {
