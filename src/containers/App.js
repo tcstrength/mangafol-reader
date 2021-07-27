@@ -10,7 +10,12 @@ import Home from "./Home";
 import TaleDetails from "./TaleDetails";
 
 export default class App extends Component {
+  constructor(props) {
+    super(props)
+
+  }
   render() {
+    console.log(this.props.location);
     return (
       <Router>
         <div className="app">

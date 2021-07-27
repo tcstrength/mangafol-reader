@@ -21,10 +21,10 @@ export default class Logout extends Component {
           onHide={() => { }}
           title="Đăng xuất thành công"
           content="Bạn đã đăng xuất thành công, cám ơn bạn đã sử dụng dịch vụ"
-          ptext="Trang chủ"
-          plink="/"
-          stext="Đăng nhập"
-          slink="/login" />
+          ptext="Đăng nhập"
+          plink="/login"
+          stext="Đăng ký"
+          slink="/register" />
       </Container >
     );
   }

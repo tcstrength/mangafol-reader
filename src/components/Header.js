@@ -1,6 +1,7 @@
 import { Nav, Navbar, Container, FormControl, InputGroup } from "react-bootstrap";
 import { Store } from "../actions/ApiCalls";
 import { logo, search } from "../constants/Images";
+import { ReactComponent as AvatarIcon } from "../resources/user.svg";
 
 function Header(props) {
   var user = Store.userProfile;
@@ -14,6 +15,17 @@ function Header(props) {
       </Nav.Link>
     </>
   )
+
+  if (user !== null && user !== undefined) {
+    profile = (
+      <>
+        <Nav.Link href="/profile" className="d-flex px-2">
+          {user.firstName}
+          <AvatarIcon width="24" height="24" className="ml-2" />
+        </Nav.Link>
+      </>
+    )
+  }
 
   return (
     <Navbar collapseOnSelect className="shadow-lg rounded" expand="lg" bg="light" variant="light" sticky="top">
