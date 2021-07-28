@@ -20,8 +20,8 @@ function Dialog(props) {
     sVariant = "primary";
   }
 
-  var sbtn = <a href={slink} className={`btn btn-sm btn-${sVariant} w-100`}>{stext}</a>
-  var pbtn = <a href={plink} className={`btn btn-sm btn-${pVariant} w-100`}>{ptext}</a>
+  var sbtn = <a href={slink} className={`btn btn btn-${sVariant} w-100`}>{stext}</a>
+  var pbtn = <a href={plink} className={`btn btn btn-${pVariant} w-100`}>{ptext}</a>
 
   if (plink === '') {
     pbtn = <Button variant={pVariant} className="w-100" onClick={props.onHide}>{ptext}</Button>

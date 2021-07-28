@@ -62,7 +62,7 @@ function TaleCard(props) {
     <Card className="p-0 mb-3">
       <a href={`/tales/${tale.slug}`} style={{ color: "inherit", textDecoration: "none" }}>
         <Card.Img
-          height="300px"
+          height="200px"
           style={{ objectFit: "cover" }}
           variant="top"
           className="embed-responsive-item"

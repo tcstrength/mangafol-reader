@@ -1,7 +1,8 @@
 import { Nav, Navbar, Container, FormControl, InputGroup } from "react-bootstrap";
 import { Store } from "../actions/ApiCalls";
-import { logo, search } from "../constants/Images";
+import { logo } from "../constants/Images";
 import { ReactComponent as AvatarIcon } from "../resources/user.svg";
+import Search from "./Search";
 
 function Header(props) {
   var user = Store.userProfile;
@@ -37,20 +38,15 @@ function Header(props) {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="me-auto w-25">
+            <Search />
+          </Nav>
+          <Nav>
+
+          </Nav>
+          <Nav>
             <Nav.Link href="/tales">Chia sẻ truyện</Nav.Link>
             <Nav.Link href="/posts">Bài viết</Nav.Link>
-          </Nav>
-          <Nav>
-            <InputGroup size="sm mr-3">
-              <FormControl type="text" placeholder="Tìm truyện" />
-              <InputGroup.Text><img
-                alt="" src={search} width="16" height="16" className="d-inline-block align-middle" />
-                {' '}
-              </InputGroup.Text>
-            </InputGroup>
-          </Nav>
-          <Nav>
             {profile}
           </Nav>
         </Navbar.Collapse>
