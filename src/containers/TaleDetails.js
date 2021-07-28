@@ -33,7 +33,7 @@ export default class TaleDetails extends Component {
   }
 
   updateTopList() {
-    const promise = TaleActions.top(10);
+    const promise = TaleActions.paging(10);
     promise.then((resp) => {
       this.setState({ topList: resp.data.content.list, loading: false })
     }).catch((resp) => {
