@@ -67,14 +67,14 @@ export const TaleActions = {
     },
     headers: authHeader
   }),
-  paging: async (offset, limit) => api.get("/tale/paging", {
+  paging: async (offset, limit) => api.get("/tale/paging?sort=rating desc", {
     params: {
       offset: offset,
       limit: limit
     },
     headers: authHeader
   }),
-  top: async (limit) => api.get("/tale/paging?sort=rating desc", {
+  top: async (limit) => api.get("/tale/paging", {
     params: {
       offset: 0,
       limit: limit

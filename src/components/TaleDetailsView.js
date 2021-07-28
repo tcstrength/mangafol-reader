@@ -89,7 +89,7 @@ function TaleDetailsView(props) {
       badge = <Badge className="bg-success rounded-pill align-middle">{text}</Badge>
     } else if (rating >= 5) {
       badge = <Badge className="bg-warning rounded-pill align-middle">{text}</Badge>
-    } else if (rating >= 0) {
+    } else if (rating > 0) {
       badge = <Badge className="bg-danger rounded-pill align-middle">{text}</Badge>
     }
 
