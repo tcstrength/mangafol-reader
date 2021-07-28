@@ -70,13 +70,13 @@ function TaleCard(props) {
     <Card className="p-0 mb-3">
       <a href={`/tales/${tale.slug}`} style={{ color: "inherit", textDecoration: "none" }}>
         <Card.Img
-          height="200px"
+          height="300px"
           style={{ objectFit: "cover" }}
           variant="top"
           className="embed-responsive-item"
           src={transferFeaturedImg(tale.featuredImg)} />
         <Card.Body>
-          <Card.Title className="mb-0 text-truncate">{tale.title}</Card.Title>
+          <Card.Title className="mb-0 text-truncate h5">{tale.title}</Card.Title>
           <Card.Text className="mb-0"><small className="text-muted">{timeSince(tale.ct)}</small></Card.Text>
           <Card.Text className="mb-1">
             <small>
@@ -94,11 +94,11 @@ function TaleCard(props) {
           </Card.Text>
         </Card.Body>
       </a>
-      <Card.Footer className="px-1 py-1">
+      {/* <Card.Footer className="px-1 py-1">
         <ButtonGroup className="w-100 " aria-label="Tale Controls">
           {readButton}
         </ButtonGroup>
-      </Card.Footer>
+      </Card.Footer> */}
     </Card >
   );
 }
