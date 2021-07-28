@@ -24,7 +24,7 @@ export const mapReadingStatus = (status) => {
 export const mapTaleFinished = (finished) => {
   if (!finished) {
     return {
-      text: 'Đang tiến hành',
+      text: 'Đang viết',
       variant: 'primary'
     }
   } else {
