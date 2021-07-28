@@ -185,8 +185,6 @@ export default class TaleDetails extends Component {
                 tale={this.state.tale}
                 show={this.state.ratingShow}
                 onRatingAccept={this.onRatingAccept}
-                onRatingChange={this.onRatingChange}
-                onDescriptionChange={this.onDescriptionChange}
                 onHide={() => { this.setState({ ratingShow: false }) }}
               />
 

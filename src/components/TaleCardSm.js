@@ -36,6 +36,27 @@ function TaleCard(props) {
     return badge;
   }
 
+  const renderReadingStatus = (readingStatus) => {
+    var badge = <Badge className="bg-danger rounded-pill">Chưa đọc</Badge>;
+
+    if (readingStatus === 1) {
+      badge = <Badge className="bg-success rounded-pill">Đang đọc</Badge>;
+    } else if (readingStatus === 2) {
+      badge = <Badge className="bg-secondary rounded-pill">Đã đọc xong</Badge>;
+    }
+
+    return badge;
+  }
+
+  const renderStatus = (finished) => {
+    var badge = <Badge className="bg-primary rounded-pill">Đang tiến hành</Badge>;
+
+    if (finished) {
+      badge = <Badge className="bg-success rounded-pill">Hoàn thành</Badge>;
+    }
+    return badge;
+  }
+
   var { tale } = props;
 
   return (
@@ -53,13 +74,17 @@ function TaleCard(props) {
           <div className="d-flex flex-column justify-content-between h-100">
             <div>
               <h6 className="py-0 my-0 text-truncate">{tale.title}</h6>
-              {renderRating(tale.rating)}
+              <small>
+                {renderRating(tale.rating)}
+                <span className="pr-1"></span>
+                {renderReadingStatus(tale.readingStatus)}
+              </small>
               <br></br>
               <small className="text-muted">{timeSince(tale.ct)}</small>
               <br></br>
               <small>Chương <strong>{tale.chapter}</strong></small>
             </div>
-            <a href={`/tales/${tale.slug}`} className="btn btn-outline-success btn-sm w-100">Truy cập</a>
+            <a href={`/tales/${tale.slug}`} className="btn btn-outline-primary btn-sm w-100">Truy cập</a>
           </div>
         </Col>
       </Row>

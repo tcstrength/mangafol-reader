@@ -4,8 +4,6 @@ import { useState } from "react";
 /**
  * props.onHide hide modal dialog
  * props.onRatingAccept user click accept current rating values
- * props.onRatingChange user change rating by hovering stars
- * props.onDescriptionChange user change shortDesc value
  * @param {*} props 
  * @returns 
  */
@@ -28,7 +26,7 @@ function TaleRatingDialog(props) {
           rating={tale.rating}
           starDimension="28px"
           starRatedColor="#fcc603"
-          changeRating={props.onRatingChange}
+          changeRating={(e) => setTale({ ...tale, rating: e.target.value })}
           numberOfStars={10}
           starHoverColor="#fcc603"
           name='rating'
@@ -36,7 +34,7 @@ function TaleRatingDialog(props) {
         <p></p>
         <Form.Group controlId="review">
           <Form.Control as="textarea" style={{ resize: "none" }} rows={3} placeholder="Mô tả về bộ truyện này" value={tale.shortDesc}
-            onChange={props.onDescriptionChange} />
+            onChange={(e) => setTale({ ...tale, shortDesc: e.target.value })} />
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
