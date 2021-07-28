@@ -52,7 +52,7 @@ function TaleCard(props) {
         <Col md={6} className="py-3" >
           <div className="d-flex flex-column justify-content-between h-100">
             <div>
-              <h6 className="py-0 my-0">{tale.title}</h6>
+              <h6 className="py-0 my-0 text-truncate">{tale.title}</h6>
               {renderRating(tale.rating)}
               <br></br>
               <small className="text-muted">{timeSince(tale.ct)}</small>

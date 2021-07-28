@@ -152,13 +152,8 @@ export default class TaleDetails extends Component {
     this.setState({ tale: tale })
   }
 
-  onRatingAccept = (e) => {
-    var { tale } = this.state
-
-    this.updateTale('Đánh giá truyện', {
-      rating: tale.rating,
-      shortDesc: tale.shortDesc
-    })
+  onRatingAccept = (tale) => {
+    this.updateTale('Đánh giá truyện', tale)
   }
 
   onNotesCompleted = (e) => {

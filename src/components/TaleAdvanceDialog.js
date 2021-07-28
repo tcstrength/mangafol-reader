@@ -9,7 +9,13 @@ import StarRatings from "react-star-ratings";
  * @returns 
  */
 function TaleAdvanceDialog(props) {
-  const [tale, setTale] = useState(props.tale)
+  const [tale, setTale] = useState({
+    title: props.tale.title,
+    author: props.tale.author,
+    readingStatus: props.tale.readingStatus,
+    taleFinished: props.tale.taleFinished,
+    linkPattern: props.tale.linkPattern
+  })
 
   const finishedRadios = [
     { name: 'Đang tiến hành', value: 'false', variant: 'outline-primary' },

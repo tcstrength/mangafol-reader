@@ -6,7 +6,7 @@ function TaleCardList(props) {
   return (
     <Row>
       {list.map((item) => {
-        return <Col md={6}><TaleCard tale={item} /></Col>
+        return <Col md={4}><TaleCard tale={item} /></Col>
       })}
     </Row>
   )
