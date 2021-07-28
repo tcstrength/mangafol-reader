@@ -14,6 +14,7 @@ function TaleAdvanceDialog(props) {
   const [tale, setTale] = useState({
     title: props.tale.title,
     author: props.tale.author,
+    chapter: props.tale.chapter,
     readingStatus: props.tale.readingStatus,
     taleFinished: props.tale.taleFinished,
     linkPattern: props.tale.linkPattern,
