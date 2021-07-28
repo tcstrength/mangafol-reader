@@ -76,14 +76,16 @@ function TaleCard(props) {
           className="embed-responsive-item"
           src={transferFeaturedImg(tale.featuredImg)} />
         <Card.Body>
-          <Card.Title>{tale.title}</Card.Title>
-          <Card.Text className="my-0"><small className="text-muted">{timeSince(tale.ct)}</small></Card.Text>
-          <Card.Text className="my-2">
-            {renderRating(tale.rating)}
-            <span className="px-1"></span>
-            {renderReadingStatus(tale.readingStatus)}
-            <span className="px-1"></span>
-            {renderStatus(tale.taleFinished)}
+          <Card.Title className="mb-0 text-truncate">{tale.title}</Card.Title>
+          <Card.Text className="mb-0"><small className="text-muted">{timeSince(tale.ct)}</small></Card.Text>
+          <Card.Text className="mb-1">
+            <small>
+              {renderRating(tale.rating)}
+              <span className="px-1"></span>
+              {renderReadingStatus(tale.readingStatus)}
+              <span className="px-1"></span>
+              {renderStatus(tale.taleFinished)}
+            </small>
           </Card.Text>
           <Card.Text className="my-0">
             Chương <strong>{tale.chapter}</strong>

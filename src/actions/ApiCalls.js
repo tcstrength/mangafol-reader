@@ -16,8 +16,9 @@ api.interceptors.response.use(
   },
 
   function (error) {
-    if (error.response.status === 401) {
-      window.location.href = "/login"
+    const status = error.response.status;
+    if (status === 401 || status == 403) {
+      window.location.href = "/login?redirect=" + window.location.href
     }
 
     return Promise.reject(error);
@@ -29,7 +30,7 @@ export const bearerToken = "Bearer " + accessToken
 export const authHeader = { "Authorization": bearerToken }
 export const userProfile = JSON.parse(localStorage.getItem("userProfile"))
 export const setAccessToken = (token) => localStorage.setItem("accessToken", token)
-export const setUserProfile = (profile) => localStorage.setItem("userProfile", profile)
+export const setUserProfile = (profile) => localStorage.setItem("userProfile", JSON.stringify(profile))
 
 export const Store = {
   bearerToken: bearerToken,
@@ -44,6 +45,12 @@ export const AuthActions = {
   login: async (body) => api.post("/auth/login", body),
   register: async (body) => api.post("/auth/register", body),
   logout: () => localStorage.clear()
+}
+
+export const UserActions = {
+  profile: async (body) => api.get("/user/me", {
+    headers: authHeader
+  })
 }
 
 export const TaleActions = {

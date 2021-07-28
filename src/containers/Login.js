@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Container, Form, Button, Card } from "react-bootstrap";
-import { AuthActions, Store } from "../actions/ApiCalls";
+import { AuthActions, Store, UserActions } from "../actions/ApiCalls";
 import LoginImage from "../resources/image.png";
 import Dialog from "../components/Dialog";
 import Loading from "../components/Loading";
@@ -30,24 +30,14 @@ export default class Login extends Component {
     promise.then((resp) => {
       const accessToken = resp.data.content.accessToken;
       Store.setAccessToken(accessToken)
-      this.setState({ loading: false, success: true })
+      UserActions.profile().then((resp) => {
+        Store.setUserProfile(resp.data.content)
+        this.setState({ loading: false, success: true })
+        window.location.href = "/"
+      })
     }).catch((resp) => {
       this.setState({ loading: false, failure: true })
     })
-  }
-
-  renderSuccessDialog() {
-    return (
-      <Dialog
-        show={this.state.success}
-        onHide={() => { this.setState({ success: false }) }}
-        title="Đăng nhập thành công"
-        content="Bạn đã đăng nhập thành công, chúc bạn một ngày vui"
-        ptext="Trang chủ"
-        plink="/"
-        stext="Cá nhân"
-        slink="/profile" />
-    )
   }
 
   renderFailureDialog() {
@@ -68,7 +58,6 @@ export default class Login extends Component {
   render() {
     return (
       < Container className="p-5 d-flex flex-column" >
-        {this.renderSuccessDialog()}
         {this.renderFailureDialog()}
         <Card className="mx-auto" style={{ width: '24rem' }}>
           <Card.Img variant="top" src={LoginImage} />
