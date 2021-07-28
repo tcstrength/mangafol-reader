@@ -37,7 +37,7 @@ function TaleCard(props) {
   }
 
   const renderReadingStatus = (readingStatus) => {
-    var badge = <Badge className="bg-danger rounded-pill">Chưa đọc</Badge>;
+    var badge = <Badge className="bg-danger rounded-pill">Ngưng</Badge>;
 
     if (readingStatus === 1) {
       badge = <Badge className="bg-success rounded-pill">Đang đọc</Badge>;

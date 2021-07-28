@@ -94,37 +94,44 @@ export default class TaleDetails extends Component {
   }
 
   onAdvanceUpdate = (tale, fileChosen) => {
-    const promise = FileActions.uploadImgbb(fileChosen)
-    promise.then((resp) => {
-      this.updateTale('Đổi ảnh đại diện cho truyện', {
-        ...tale,
-        featuredImg: resp.data.content
-      })
-    }).catch((resp) => {
+    this.updateTale("Cập nhật nâng cao", {
+      ...tale,
+      featuredImg: null
     })
+
+    console.log(fileChosen)
+
+    if (fileChosen !== null && fileChosen !== undefined) {
+      const promise = FileActions.uploadImgbb(fileChosen)
+      promise.then((resp) => {
+        this.updateTale('Đổi ảnh đại diện cho truyện', {
+          featuredImg: resp.data.content
+        })
+      }).catch((resp) => {
+      })
+    }
   }
 
   onAdvanceDelete = () => {
     const promise = TaleActions.delete(this.state.tale.id)
     this.setState({ updating: true })
     promise.then((resp) => {
-      console.log(resp);
       this.props.history.push('/')
     })
   }
 
-  onStartUploadingClick = (e) => {
-    this.setState({ uploadStatus: 'uploading' })
-    const promise = FileActions.uploadImgbb(this.state.fileChosen)
-    promise.then((resp) => {
-      this.setState({ uploadStatus: 'success' })
-      this.updateTale('Đổi ảnh đại diện cho truyện', {
-        featuredImg: resp.data.content
-      })
-    }).catch((resp) => {
-      this.setState({ uploadStatus: 'error' })
-    })
-  }
+  // onStartUploadingClick = (e) => {
+  //   this.setState({ uploadStatus: 'uploading' })
+  //   const promise = FileActions.uploadImgbb(this.state.fileChosen)
+  //   promise.then((resp) => {
+  //     this.setState({ uploadStatus: 'success' })
+  //     this.updateTale('Đổi ảnh đại diện cho truyện', {
+  //       featuredImg: resp.data.content
+  //     })
+  //   }).catch((resp) => {
+  //     this.setState({ uploadStatus: 'error' })
+  //   })
+  // }
 
   onRatingClick = (e) => {
     this.setState({ ratingShow: true })
