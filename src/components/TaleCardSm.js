@@ -29,7 +29,7 @@ function TaleCard(props) {
       badge = <Badge className="bg-success rounded-pill">{text}</Badge>
     } else if (rating >= 5) {
       badge = <Badge className="bg-warning rounded-pill">{text}</Badge>
-    } else if (rating >= 0) {
+    } else if (rating > 0) {
       badge = <Badge className="bg-danger rounded-pill">{text}</Badge>
     }
 
