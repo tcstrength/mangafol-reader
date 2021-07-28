@@ -81,10 +81,8 @@ function TaleCard(props) {
           <Card.Text className="mb-1">
             <small>
               {renderRating(tale.rating)}
-              <span className="px-1"></span>
+              <span className="pr-1"></span>
               {renderReadingStatus(tale.readingStatus)}
-              <span className="px-1"></span>
-              {renderStatus(tale.taleFinished)}
             </small>
           </Card.Text>
           <Card.Text className="my-0">
