@@ -171,8 +171,8 @@ function TaleDetailsView(props) {
       <ButtonGroup className="pt-3 w-100" aria-label="Tale Controls">
         {readNowBtn}
         <Button variant="secondary" onClick={props.onNotesClick}><NotesIcon className="mb-1" fill="#FFF" width="16" height="16" /> Ghi chú</Button>
-        <Button variant="secondary" onClick={props.onRatingClick}><RatingIcon2 className="mb-1" fill="#FFF" width="16" height="16" /> Đánh giá</Button>
         <Button variant="secondary" onClick={props.onShareClick}><ShareIcon className="mb-1" fill="#FFF" width="16" height="16" /> Chia sẻ</Button>
+        <Button variant="secondary" onClick={props.onRatingClick}><RatingIcon2 className="mb-1" fill="#FFF" width="16" height="16" /> Đánh giá</Button>
         <Button variant="secondary" onClick={props.onUploadClick}>Đổi ảnh</Button>
         <Button variant="warning" onClick={props.onAdvanceClick}>Nâng cao</Button>
       </ButtonGroup>
