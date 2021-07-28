@@ -19,7 +19,7 @@ export default class Home extends Component {
       recentList: [],
       topList: [],
       offset: -1,
-      limit: 10,
+      limit: 12,
       reachEnd: false
     }
   }
