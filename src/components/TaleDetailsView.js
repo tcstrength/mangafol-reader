@@ -1,5 +1,6 @@
 import { Badge, Row, Col, Form, Button, ButtonGroup } from "react-bootstrap"
 import { featured } from "../constants/Images";
+import { mapReadingStatus } from "../constants/Config";
 import AuthorIcon from "../resources/author.svg";
 import FinishedIcon from "../resources/finished.svg";
 import FlagIcon from "../resources/flag.svg";
@@ -52,13 +53,8 @@ function TaleDetailsView(props) {
   }
 
   const renderReadingStatus = (readingStatus) => {
-    var badge = <Badge className="bg-danger rounded-pill align-middle">Chưa đọc</Badge>;
-
-    if (readingStatus === 1) {
-      badge = <Badge className="bg-success rounded-pill align-middle">Đang đọc</Badge>;
-    } else if (readingStatus === 2) {
-      badge = <Badge className="bg-secondary rounded-pill align-middle">Đã đọc xong</Badge>;
-    }
+    var map = mapReadingStatus(readingStatus)
+    var badge = <Badge className={`bg-${map.variant} rounded-pill align-middle`}>{map.text}</Badge>;
 
     return (
       <li className={`${pt} align-middle`} key="status">

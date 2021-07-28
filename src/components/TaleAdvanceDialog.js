@@ -1,5 +1,6 @@
 import { Modal, Button, Form, ButtonGroup, ToggleButton } from "react-bootstrap";
 import { useState } from "react";
+import { mapReadingStatus, mapTaleFinished } from "../constants/Config";
 import StarRatings from "react-star-ratings";
 import Loading from "./Loading";
 import { featured } from "../constants/Images";
@@ -40,16 +41,19 @@ function TaleAdvanceDialog(props) {
     }
   }
 
-  const finishedRadios = [
-    { name: 'Đang tiến hành', value: 'false', variant: 'outline-primary' },
-    { name: 'Hoàn thành', value: 'true', variant: 'outline-secondary' },
-  ];
+  const finishedRadios = [false, true].map((item) => {
+    const map = mapTaleFinished(item)
+    return {
+      name: map.text, value: item.toString(), variant: `outline-${map.variant}`
+    }
+  })
 
-  const readingRadios = [
-    { name: 'Chưa đọc', value: '0', variant: 'outline-danger' },
-    { name: 'Đang đọc', value: '1', variant: 'outline-success' },
-    { name: 'Đã đọc xong', value: '2', variant: 'outline-secondary' },
-  ]
+  const readingRadios = [0, 1, 2].map((item) => {
+    const map = mapReadingStatus(item)
+    return {
+      name: map.text, value: item.toString(), variant: `outline-${map.variant}`
+    }
+  })
 
   return (
     <Form className="mt-3">
@@ -88,7 +92,7 @@ function TaleAdvanceDialog(props) {
             <ButtonGroup className=" w-100">
               {finishedRadios.map((radio, idx) => (
                 <ToggleButton
-                  className="w-50"
+                  className="w-50 btn-sm"
                   key={idx}
                   id={`radio-${idx}`}
                   type="radio"
@@ -108,7 +112,7 @@ function TaleAdvanceDialog(props) {
             <ButtonGroup className="w-100">
               {readingRadios.map((radio, idx) => (
                 <ToggleButton
-                  className="w-50"
+                  className="w-50 btn-sm"
                   key={idx}
                   id={`radio-${idx}`}
                   type="radio"

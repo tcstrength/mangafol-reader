@@ -31,7 +31,7 @@ export default class App extends Component {
 
     return (
       <Router>
-        <div className="app">
+        <div className="app" style={{ backgroundColor: "#FAFAFA" }}>
           <Header></Header>
           <Container className="mt-5">
             {content}

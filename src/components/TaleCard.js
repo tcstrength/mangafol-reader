@@ -1,5 +1,6 @@
 import { Card, Col, Row, Badge, Button, ButtonGroup } from "react-bootstrap";
 import { featured } from "../constants/Images";
+import { mapReadingStatus, mapTaleFinished } from "../constants/Config";
 import { useState } from "react";
 import { timeSince } from "../utils/DateUtils";
 
@@ -40,23 +41,14 @@ function TaleCard(props) {
   var { tale } = props;
 
   const renderReadingStatus = (readingStatus) => {
-    var badge = <Badge className="bg-danger rounded-pill">Chưa đọc</Badge>;
-
-    if (readingStatus === 1) {
-      badge = <Badge className="bg-success rounded-pill">Đang đọc</Badge>;
-    } else if (readingStatus === 2) {
-      badge = <Badge className="bg-secondary rounded-pill">Đã đọc xong</Badge>;
-    }
-
+    var map = mapReadingStatus(readingStatus);
+    var badge = <Badge className={`bg-${map.variant} rounded-pill`}>{map.text}</Badge>;
     return badge;
   }
 
   const renderStatus = (finished) => {
-    var badge = <Badge className="bg-primary rounded-pill">Đang tiến hành</Badge>;
-
-    if (finished) {
-      badge = <Badge className="bg-success rounded-pill">Hoàn thành</Badge>;
-    }
+    var map = mapTaleFinished(finished)
+    var badge = <Badge className={`bg-${map.variant} rounded-pill`}>{map.text}</Badge>;
     return badge;
   }
 

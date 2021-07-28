@@ -12,7 +12,7 @@ function NewTaleBox(props) {
             <Form.Control required type="text" placeholder="Tên truyện" onChange={props.onTitleChange} />
           </Form.Group>
           <hr></hr>
-          <Button variant="outline-primary" className="w-100" type="submit">
+          <Button variant="primary" className="w-100" type="submit">
             {
               props.loading &&
               <Loading size="sm" />
