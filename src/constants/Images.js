@@ -1,4 +1,4 @@
-import FeaturedImg from "../resources/image.svg";
+import FeaturedImg from "../resources/200x300.png";
 import LogoImg from "../logo.svg";
 import SearchIcon from "../resources/search.svg";
 export const featured = FeaturedImg;

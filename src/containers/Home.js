@@ -61,7 +61,7 @@ export default class Home extends Component {
 
   onNewSubmit = (e) => {
     this.setState({ creating: true })
-    const promise = TaleActions.create({ title: this.state.newTitle })
+    const promise = TaleActions.create({ title: this.state.newTitle, readingStatus: 1 })
     promise.then((resp) => {
       this.setState({
         creating: false, recentList: [

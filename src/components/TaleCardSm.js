@@ -61,34 +61,36 @@ function TaleCard(props) {
 
   return (
     <Card className="mb-3">
-      <Row>
+      <a href={`/tales/${tale.slug}`} style={{ color: "inherit", textDecoration: "none" }}>
 
-        <Col sm={5}>
-          <Card.Img height="180px" src={transferFeaturedImg(tale.featuredImg)}
-            style={{ objectFit: "cover" }}>
+        <Row>
 
-          </Card.Img>
-        </Col>
+          <Col sm={5}>
+            <Card.Img height="180px" src={transferFeaturedImg(tale.featuredImg)}
+              style={{ objectFit: "cover" }}>
 
-        <Col md={6} className="py-3" >
-          <div className="d-flex flex-column justify-content-between h-100">
-            <div>
-              <h6 className="py-0 my-0 text-truncate">{tale.title}</h6>
-              <small>
-                {renderRating(tale.rating)}
-                <span className="pr-1"></span>
-                {renderReadingStatus(tale.readingStatus)}
-              </small>
-              <br></br>
-              <small className="text-muted">{timeSince(tale.ct)}</small>
-              <br></br>
-              <small>Chương <strong>{tale.chapter}</strong></small>
+            </Card.Img>
+          </Col>
+
+          <Col md={6} className="py-3" >
+            <div className="d-flex flex-column justify-content-between h-100">
+              <div>
+                <h6 className="py-0 my-0 text-truncate">{tale.title}</h6>
+                <small>
+                  {renderRating(tale.rating)}
+                  <span className="pr-1"></span>
+                  {renderReadingStatus(tale.readingStatus)}
+                </small>
+                <br></br>
+                <small className="text-muted">{timeSince(tale.ct)}</small>
+                <br></br>
+                <small>Chương <strong>{tale.chapter}</strong></small>
+              </div>
+              {/* <a href={`/tales/${tale.slug}`} className="btn btn-outline-primary btn-sm w-100">Ghi chú</a> */}
             </div>
-            <a href={`/tales/${tale.slug}`} className="btn btn-outline-primary btn-sm w-100">Truy cập</a>
-          </div>
-        </Col>
-      </Row>
-
+          </Col>
+        </Row>
+      </a>
     </Card >
   );
 }

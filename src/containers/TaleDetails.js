@@ -5,7 +5,6 @@ import LoadingDialog from "../components/LoadingDialog";
 import TaleDetailsView from "../components/TaleDetailsView";
 import Dialog from "../components/Dialog";
 import TaleAdvanceDialog from "../components/TaleAdvanceDialog";
-import TaleUploadDialog from "../components/TaleUploadDialog";
 import TaleRatingDialog from "../components/TaleRatingDialog";
 import TaleNotesDialog from "../components/TaleNotesDialog";
 import TaleNotesView from "../components/TaleNotesView";
@@ -27,9 +26,7 @@ export default class TaleDetails extends Component {
       advanceShow: false,
       uploadShow: false,
       ratingShow: false,
-      notesShow: false,
-      fileChosen: null,
-      uploadStatus: null
+      notesShow: false
     }
   }
 
@@ -96,20 +93,15 @@ export default class TaleDetails extends Component {
     this.setState({ advanceShow: true })
   }
 
-  onRatingChange = (rating, name) => {
-    console.log(rating)
-    const { tale } = this.state
-
-    this.setState({
-      tale: {
+  onAdvanceUpdate = (tale, fileChosen) => {
+    const promise = FileActions.uploadImgbb(fileChosen)
+    promise.then((resp) => {
+      this.updateTale('Đổi ảnh đại diện cho truyện', {
         ...tale,
-        rating: rating
-      }
+        featuredImg: resp.data.content
+      })
+    }).catch((resp) => {
     })
-  }
-
-  onAdvanceUpdate = (tale) => {
-    this.updateTale('Cập nhật nâng cao', tale);
   }
 
   onAdvanceDelete = () => {
@@ -119,10 +111,6 @@ export default class TaleDetails extends Component {
       console.log(resp);
       this.props.history.push('/')
     })
-  }
-
-  onUploadClick = (e) => {
-    this.setState({ uploadShow: true, uploadStatus: null, fileChosen: null })
   }
 
   onStartUploadingClick = (e) => {
@@ -138,18 +126,8 @@ export default class TaleDetails extends Component {
     })
   }
 
-  onUploadFileChange = (e) => {
-    this.setState({ fileChosen: e.target.files[0] })
-  }
-
   onRatingClick = (e) => {
     this.setState({ ratingShow: true })
-  }
-
-  onDescriptionChange = (e) => {
-    var { tale } = this.state
-    tale.shortDesc = e.target.value;
-    this.setState({ tale: tale })
   }
 
   onRatingAccept = (tale) => {
@@ -202,13 +180,6 @@ export default class TaleDetails extends Component {
                 onDelete={this.onAdvanceDelete}
                 show={this.state.advanceShow}
                 tale={this.state.tale} />
-
-              <TaleUploadDialog
-                onHide={() => { this.setState({ uploadShow: false }) }}
-                show={this.state.uploadShow}
-                uploadStatus={this.state.uploadStatus}
-                onFileChange={this.onUploadFileChange}
-                onUploadClick={this.onStartUploadingClick} />
 
               <TaleDetailsView
                 tale={this.state.tale}

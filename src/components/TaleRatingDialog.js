@@ -26,7 +26,7 @@ function TaleRatingDialog(props) {
           rating={tale.rating}
           starDimension="28px"
           starRatedColor="#fcc603"
-          changeRating={(e) => setTale({ ...tale, rating: e.target.value })}
+          changeRating={(rating, name) => setTale({ ...tale, rating: rating })}
           numberOfStars={10}
           starHoverColor="#fcc603"
           name='rating'
