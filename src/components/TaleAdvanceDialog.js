@@ -15,7 +15,6 @@ function TaleAdvanceDialog(props) {
   const [tale, setTale] = useState({
     title: props.tale.title,
     author: props.tale.author,
-    chapter: props.tale.chapter,
     readingStatus: props.tale.readingStatus,
     taleFinished: props.tale.taleFinished,
     linkPattern: props.tale.linkPattern,
@@ -78,21 +77,12 @@ function TaleAdvanceDialog(props) {
           </Form.Group>
 
           <Form.Group className="mb-2 d-flex" controlId="author">
-            <Form.Control required style={{ marginRight: "6px" }} type="text" placeholder="Tác giả" value={tale.author}
+            <Form.Control className="w-50" required style={{ marginRight: "6px" }} type="text" placeholder="Tác giả" value={tale.author}
               onChange={(e) => { setTale({ ...tale, author: e.target.value }) }} />
-            <Form.Control
-              style={{ marginLeft: "6px" }}
-              type="number"
-              size="sm"
-              value={tale.chapter}
-              onChange={(e) => { setTale({ ...tale, chapter: e.target.value }) }} />
-          </Form.Group>
-
-          <Form.Group className="mb-2" controlId="finished">
-            <ButtonGroup className=" w-100">
+            <ButtonGroup className="w-50">
               {finishedRadios.map((radio, idx) => (
                 <ToggleButton
-                  className="w-50 btn-sm"
+                  className="w-50 btn"
                   key={idx}
                   id={`radio-${idx}`}
                   type="radio"
@@ -112,7 +102,7 @@ function TaleAdvanceDialog(props) {
             <ButtonGroup className="w-100">
               {readingRadios.map((radio, idx) => (
                 <ToggleButton
-                  className="w-50 btn-sm"
+                  className="w-50 btn"
                   key={idx}
                   id={`radio-${idx}`}
                   type="radio"
