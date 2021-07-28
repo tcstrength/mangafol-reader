@@ -30,7 +30,7 @@ export default class Home extends Component {
   }
 
   updateTopList() {
-    const promise = TaleActions.top(10);
+    const promise = TaleActions.recent(10);
     promise.then((resp) => {
       this.setState({ topList: resp.data.content.list, loading: false })
     }).catch((resp) => {
@@ -98,7 +98,7 @@ export default class Home extends Component {
         <Col md={4}>
           <TaleSideCardList
             variant="danger"
-            title="Truyện hay"
+            title="Truyện gần đây"
             list={this.state.topList}
           />
         </Col>
