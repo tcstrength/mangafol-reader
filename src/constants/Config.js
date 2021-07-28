@@ -34,3 +34,7 @@ export const mapTaleFinished = (finished) => {
     }
   }
 }
+
+export const getTaleLink = (tale) => {
+  return '/tales/' + tale.slug;
+}

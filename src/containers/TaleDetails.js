@@ -9,9 +9,6 @@ import TaleRatingDialog from "../components/TaleRatingDialog";
 import TaleNotesDialog from "../components/TaleNotesDialog";
 import TaleNotesView from "../components/TaleNotesView";
 import TaleSideCardList from "../components/TaleSideCardList";
-import { throttle } from 'throttle-debounce';
-import { useHistory } from "react-router-dom";
-
 
 export default class TaleDetails extends Component {
   constructor(props) {

@@ -16,11 +16,14 @@ api.interceptors.response.use(
   },
 
   function (error) {
-    const status = error.response.status;
-    if (status === 401 || status == 403) {
-      window.location.href = "/login"
-    }
 
+    if (error.response !== null && error.response !== undefined) {
+      const status = error.response.status;
+      if (status === 401 || status == 403) {
+        window.location.href = "/login"
+      }
+
+    }
     return Promise.reject(error);
   }
 );
@@ -55,6 +58,13 @@ export const UserActions = {
 
 export const TaleActions = {
   create: async (body) => api.post("/tale", body, {
+    headers: authHeader
+  }),
+  search: async (text, limit) => api.get("/tale/search", {
+    params: {
+      text: text,
+      limit: limit
+    },
     headers: authHeader
   }),
   paging: async (offset, limit) => api.get("/tale/paging", {
