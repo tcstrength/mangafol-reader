@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Container, Form, Button, Card } from "react-bootstrap";
+import { AuthActions } from "../actions/ApiCalls";
 import LoginImage from "../resources/image.png";
 import Dialog from "../components/Dialog";
 import Loading from "../components/Loading";
@@ -22,6 +23,11 @@ export default class Register extends Component {
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({ loading: true })
+    AuthActions.register(this.state).then((resp) => {
+      this.setState({ loading: false, success: true })
+    }).catch((resp) => {
+      this.setState({ loading: false, failure: true })
+    })
   }
 
   renderSuccessDialog() {
