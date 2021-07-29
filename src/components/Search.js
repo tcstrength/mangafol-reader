@@ -10,18 +10,20 @@ import Loading from "./Loading";
 function Search(props) {
   const [list, setList] = useState([])
   const [loading, setLoading] = useState(false)
+  const [text, setText] = useState('')
 
   const searchText = throttle(500, false, (e) => {
-    if (e.target.value !== '') {
+    setText(e.target.value)
+
+    if (text !== '') {
       setLoading(true);
       const text = e.target.value
       TaleActions.search(text, 10).then((resp) => {
-        setList(resp.data.content.list)
-        setLoading(false);
+        if (text != '') {
+          setList(resp.data.content.list)
+          setLoading(false);
+        }
       })
-    } else {
-      setList([])
-      setLoading(false);
     }
   });
 
@@ -51,7 +53,7 @@ function Search(props) {
         }
       </Dropdown>
       <div>
-        {loading && <Loading className="ml-1 mt-1 align-middle" />}
+        {(text != '' && loading) && <Loading className="ml-1 mt-1 align-middle" />}
       </div>
     </>
   )
