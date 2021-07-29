@@ -25,8 +25,8 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.updateLoadMore();
     this.updateTopList();
+    this.updateLoadMore();
   }
 
   updateTopList() {
