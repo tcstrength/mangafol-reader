@@ -51,8 +51,11 @@ export const AuthActions = {
 }
 
 export const UserActions = {
-  profile: async (body) => api.get("/user/me", {
+  profile: async () => api.get("/user/me", {
     headers: authHeader
+  }),
+  profile: async (token) => api.get("/user/me", {
+    headers: { "Authorization": "Bearer " + token }
   })
 }
 

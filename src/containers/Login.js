@@ -30,7 +30,7 @@ export default class Login extends Component {
     promise.then((resp) => {
       const accessToken = resp.data.content.accessToken;
       Store.setAccessToken(accessToken)
-      UserActions.profile().then((resp) => {
+      UserActions.profile(accessToken).then((resp) => {
         Store.setUserProfile(resp.data.content)
         this.setState({ loading: false, success: true })
         window.location.href = "/"
