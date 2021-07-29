@@ -7,23 +7,27 @@ import { TaleActions } from "../actions/ApiCalls";
 import { getTaleLink } from "../constants/Config";
 import Loading from "./Loading";
 
+var keyword = "";
+
 function Search(props) {
   const [list, setList] = useState([])
   const [loading, setLoading] = useState(false)
-  const [text, setText] = useState('')
 
   const searchText = throttle(500, false, (e) => {
-    setText(e.target.value)
+    const text = e.target.value;
+    keyword = text;
 
     if (text !== '') {
       setLoading(true);
-      const text = e.target.value
       TaleActions.search(text, 10).then((resp) => {
-        if (text != '') {
-          setList(resp.data.content.list)
+        if (resp.config.params.text === keyword) {
+          console.log(keyword)
           setLoading(false);
+          setList(resp.data.content.list)
         }
       })
+    } else {
+      setLoading(false);
     }
   });
 
@@ -53,7 +57,7 @@ function Search(props) {
         }
       </Dropdown>
       <div>
-        {(text != '' && loading) && <Loading className="ml-1 mt-1 align-middle" />}
+        {loading && <Loading className="ml-1 mt-1 align-middle" />}
       </div>
     </>
   )
