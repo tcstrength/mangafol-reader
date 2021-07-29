@@ -26,7 +26,13 @@ export default class App extends Component {
     )
 
     if (Store.userProfile === null || Store.userProfile === undefined) {
-      content = <Login />
+      content = (
+        <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+          <Route path="/" component={Login} />
+        </Switch>
+      )
     }
 
     return (
