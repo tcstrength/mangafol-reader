@@ -29,7 +29,7 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
-    this.setState({ recentLoading: true })
+    this.setState({ recentLoading: true, loading: true })
     this.updateTopList();
     this.updateLastUpdateList();
     this.updateLoadMore();
@@ -46,7 +46,7 @@ export default class Home extends Component {
     this.setState({ topLoading: true })
     const promise = TaleActions.top(6);
     promise.then((resp) => {
-      this.setState({ topList: resp.data.content.list, topLoading: false })
+      this.setState({ topList: resp.data.content.list, topLoading: false, loading: false })
     }).catch((resp) => {
     })
   }

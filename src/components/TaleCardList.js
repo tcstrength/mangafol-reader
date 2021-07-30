@@ -23,7 +23,7 @@ function TaleCardList(props) {
           <Loading size="md" />
         </div>
       }
-      <Row>
+      <Row style={{ minHeight: "25%" }}>
 
         {list.map((item) => {
           return <Col md={4}><TaleCard tale={item} /></Col>
