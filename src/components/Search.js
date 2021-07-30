@@ -28,17 +28,19 @@ function Search(props) {
       })
     } else {
       setLoading(false);
+      setList([])
     }
   });
 
   return (
     <>
       <Dropdown>
-        <InputGroup size="sm mr-3" onChange={searchText}>
-          <FormControl type="text" placeholder="Tìm truyện" />
+        <InputGroup size="mr-3" onChange={searchText}>
+          <FormControl className="pt-1" type="text" placeholder="Tìm truyện" />
           <InputGroup.Text >
-            <img
-              alt="" src={search} width="16" height="16" className="d-inline-block align-middle" />
+            {!loading && <img
+              alt="" src={search} width="16" height="16" className="d-inline-block align-middle" />}
+            {loading && <Loading className="" />}
             {' '}
           </InputGroup.Text>
         </InputGroup>
@@ -56,9 +58,7 @@ function Search(props) {
           </div>
         }
       </Dropdown>
-      <div>
-        {loading && <Loading className="ml-1 mt-1 align-middle" />}
-      </div>
+
     </>
   )
 }

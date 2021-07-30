@@ -1,6 +1,7 @@
 import { ReactComponent as NotesIcon } from "../resources/notes.svg";
 import { Row, Col, Card, Badge } from "react-bootstrap"
 import { timeSince } from "../utils/DateUtils"
+import { urlify } from "../utils/UrlUtils";
 import { TaleActions } from "../actions/ApiCalls";
 import { useState } from "react";
 
@@ -23,7 +24,7 @@ function TaleNotes(props) {
         <p className="mb-0 text-truncate ">
           <Badge className="bg-success mr-2">Chương {item.chapter}
           </Badge>
-          {item.content}
+          <div dangerouslySetInnerHTML={{ __html: urlify(item.content) }} />
         </p>
         <small className="text-muted d-flex">{timeSince(item.ct)}
           <a href="javascript:void(0)"
