@@ -16,7 +16,8 @@ export default class TaleDetails extends Component {
     this.state = {
       slug: props.match.params.slug,
       notesList: [],
-      topList: [],
+      lastUpdateList: [],
+      lastUpdateLoading: false,
       loading: true,
       updating: false,
       failure: false,
@@ -33,9 +34,10 @@ export default class TaleDetails extends Component {
   }
 
   updateTopList() {
-    const promise = TaleActions.paging(10);
+    this.setState({ lastUpdateLoading: true })
+    const promise = TaleActions.lastUpdate(10);
     promise.then((resp) => {
-      this.setState({ topList: resp.data.content.list, loading: false })
+      this.setState({ lastUpdateList: resp.data.content.list, loading: false, lastUpdateLoading: false })
     }).catch((resp) => {
     })
   }
@@ -206,8 +208,9 @@ export default class TaleDetails extends Component {
         <Col md={4}>
           <TaleSideCardList
             variant="danger"
-            title="Truyện hay"
-            list={this.state.topList}
+            title="Truyện vừa cập nhật"
+            loading={this.state.lastUpdateLoading}
+            list={this.state.lastUpdateList}
           />
         </Col>
       </Row>

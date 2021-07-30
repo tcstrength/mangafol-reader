@@ -56,6 +56,9 @@ export const UserActions = {
   }),
   profile: async (token) => api.get("/user/me", {
     headers: { "Authorization": "Bearer " + token }
+  }),
+  summary: async () => api.get("/user/summary", {
+    headers: authHeader
   })
 }
 
@@ -70,9 +73,16 @@ export const TaleActions = {
     },
     headers: authHeader
   }),
-  paging: async (offset, limit) => api.get("/tale/paging?sort=rating desc", {
+  top: async (limit) => api.get("/tale/paging?sort=rating desc", {
     params: {
-      offset: offset,
+      offset: 0,
+      limit: limit
+    },
+    headers: authHeader
+  }),
+  lastUpdate: async (limit) => api.get("/tale/paging?sort=ut desc", {
+    params: {
+      offset: 0,
       limit: limit
     },
     headers: authHeader
@@ -80,6 +90,13 @@ export const TaleActions = {
   recent: async (limit) => api.get("/tale/paging", {
     params: {
       offset: 0,
+      limit: limit
+    },
+    headers: authHeader
+  }),
+  recent: async (offset, limit) => api.get("/tale/paging", {
+    params: {
+      offset: offset,
       limit: limit
     },
     headers: authHeader

@@ -65,14 +65,14 @@ function TaleCard(props) {
 
         <Row>
 
-          <Col sm={5}>
+          <Col sm={4}>
             <Card.Img height="180px" src={transferFeaturedImg(tale.featuredImg)}
               style={{ objectFit: "cover" }}>
 
             </Card.Img>
           </Col>
 
-          <Col md={6} className="py-3" >
+          <Col md={8} className="py-3" >
             <div className="d-flex flex-column justify-content-between h-100">
               <div>
                 <h6 className="py-0 my-0 text-truncate">{tale.title}</h6>
@@ -82,7 +82,7 @@ function TaleCard(props) {
                   {renderReadingStatus(tale.readingStatus)}
                 </small>
                 <br></br>
-                <small className="text-muted">{timeSince(tale.ct)}</small>
+                <small className="text-muted">{timeSince(tale.ut)}</small>
                 <br></br>
                 <small>Chương <strong>{tale.chapter}</strong></small>
               </div>

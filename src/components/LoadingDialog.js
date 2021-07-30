@@ -15,7 +15,7 @@ function LoadingDialog(props) {
         <p></p>
         <h3>Đang tải dữ liệu</h3>
         <p></p>
-        <a href="" className="btn btn-outline-success w-75">
+        <a href="" className="btn btn-success w-75">
           Thử lại
         </a>
       </Modal.Body>
