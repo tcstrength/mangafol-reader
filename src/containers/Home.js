@@ -6,18 +6,22 @@ import Loading from "../components/Loading";
 import LoadingDialog from "../components/LoadingDialog";
 import TaleSideCardList from "../components/TaleSideCardList";
 import TaleCardList from "../components/TaleCardList";
+import TaleSummary from "../components/TaleSummary";
 import { List } from "css-tree";
 
 export default class Home extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loading: true,
+      loading: false,
       creating: false,
       loadMore: false,
       newTitle: "",
       recentList: [],
+      lastUpdateList: [],
+      lastUpdateLoading: false,
       topList: [],
+      topLoading: false,
       offset: -1,
       limit: 12,
       reachEnd: false
@@ -25,14 +29,24 @@ export default class Home extends Component {
   }
 
   componentDidMount() {
+    this.setState({ recentLoading: true })
     this.updateTopList();
+    this.updateLastUpdateList();
     this.updateLoadMore();
   }
 
+  updateLastUpdateList() {
+    this.setState({ lastUpdateLoading: true })
+    TaleActions.lastUpdate(10).then((resp) => {
+      this.setState({ lastUpdateList: resp.data.content.list, lastUpdateLoading: false })
+    })
+  }
+
   updateTopList() {
-    const promise = TaleActions.recent(10);
+    this.setState({ topLoading: true })
+    const promise = TaleActions.top(6);
     promise.then((resp) => {
-      this.setState({ topList: resp.data.content.list, loading: false })
+      this.setState({ topList: resp.data.content.list, topLoading: false })
     }).catch((resp) => {
     })
   }
@@ -41,11 +55,10 @@ export default class Home extends Component {
     this.setState({ loadMore: true })
     const { offset, limit, recentList } = this.state;
     const newOffset = offset + 1;
-    const promise = TaleActions.paging(newOffset, limit);
+    const promise = TaleActions.recent(newOffset, limit);
 
     promise.then((resp) => {
       const list = resp.data.content.list;
-
       if (list.length < limit) {
         this.setState({ recentList: recentList.concat(list), reachEnd: true, loadMore: false })
       } else {
@@ -81,11 +94,30 @@ export default class Home extends Component {
       <Row>
         <Col md={8}>
           <LoadingDialog loading={this.state.loading} />
-          <NewTaleBox
-            loading={this.state.creating}
-            onTitleChange={this.onTitleChange}
-            onNewSubmit={this.onNewSubmit} />
-          <TaleCardList list={this.state.recentList} />
+          <Row>
+            <Col md={4}>
+              <TaleSummary />
+            </Col>
+            <Col md={8}>
+              <NewTaleBox
+                loading={this.state.creating}
+                onTitleChange={this.onTitleChange}
+                onNewSubmit={this.onNewSubmit} />
+            </Col>
+          </Row>
+          <br></br>
+          <TaleCardList
+            bg="secondary"
+            title="Truyện được đánh giá hay"
+            variant="light"
+            loading={this.state.topLoading}
+            list={this.state.topList} />
+          <br></br>
+          <TaleCardList
+            bg="secondary"
+            title="Truyện gần đây"
+            variant="light"
+            list={this.state.recentList} />
           <div className="text-center pb-3">
             {!this.state.reachEnd && !this.state.loading &&
               <Button className="w-25" variant="secondary"
@@ -97,9 +129,10 @@ export default class Home extends Component {
         </Col>
         <Col md={4}>
           <TaleSideCardList
+            loading={this.state.lastUpdateLoading}
             variant="danger"
-            title="Truyện gần đây"
-            list={this.state.topList}
+            title="Truyện vừa cập nhật"
+            list={this.state.lastUpdateList}
           />
         </Col>
       </Row>
