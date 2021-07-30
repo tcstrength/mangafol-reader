@@ -5,8 +5,6 @@ import { urlify } from "../utils/UrlUtils";
 import { TaleActions } from "../actions/ApiCalls";
 import { useState } from "react";
 
-var parseHtml = require("html-react-parser");
-
 function TaleNotes(props) {
   const [style, setStyle] = useState({ display: 'none' });
   const item = props.notes;
