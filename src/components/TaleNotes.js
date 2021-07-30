@@ -5,6 +5,8 @@ import { urlify } from "../utils/UrlUtils";
 import { TaleActions } from "../actions/ApiCalls";
 import { useState } from "react";
 
+var parseHtml = require("html-react-parser");
+
 function TaleNotes(props) {
   const [style, setStyle] = useState({ display: 'none' });
   const item = props.notes;
@@ -24,7 +26,7 @@ function TaleNotes(props) {
         <p className="mb-0 text-truncate ">
           <Badge className="bg-success mr-2">Chương {item.chapter}
           </Badge>
-          {urlify(item.content)}
+          <div dangerouslySetInnerHTML={{ __html: urlify(item.content) }} />
         </p>
         <small className="text-muted d-flex">{timeSince(item.ct)}
           <a href="javascript:void(0)"

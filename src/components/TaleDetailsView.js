@@ -14,6 +14,7 @@ import { ReactComponent as NotesIcon } from "../resources/notes.svg";
 import { ReactComponent as ShareIcon } from "../resources/share.svg";
 import Loading from "./Loading";
 import { timeSince } from "../utils/DateUtils";
+import { urlify } from "../utils/UrlUtils";
 import { useState } from "react";
 
 function TaleDetailsView(props) {
@@ -38,16 +39,20 @@ function TaleDetailsView(props) {
     return featuredImg.viewPath;
   }
 
-  const renderItem = (head, icon, content) => {
+  const renderItem = (head, icon, content, isHtml) => {
     if (content === null || content === '') {
       content = 'Chưa cập nhật';
+    }
+
+    if (isHtml) {
+      content = urlify(content);
     }
 
     return (
       <li className={pt} key={head}>
         <img alt="" src={icon} width="20" className="align-middle" />
         <b className="mx-1 align-middle">{head}:</b>
-        <span className="align-middle">{content}</span>
+        <span className="align-middle" dangerouslySetInnerHTML={{ __html: content }}></span>
       </li>
     )
   }
@@ -151,12 +156,12 @@ function TaleDetailsView(props) {
               <small className="text-muted">{timeSince(tale.ct)}</small>
             </li>
 
-            {renderItem('Tác giả', AuthorIcon, tale.author)}
+            {renderItem('Tác giả', AuthorIcon, tale.author, false)}
             {renderRating(tale.rating)}
             {renderReadingStatus(tale.readingStatus)}
             {renderStatus(tale.taleFinished)}
             {renderChapter(tale.chapter)}
-            {renderItem('Mô tả', BookIcon, transferDescription(tale.shortDesc))}
+            {renderItem('Mô tả', BookIcon, transferDescription(tale.shortDesc), true)}
           </ul>
         </Col>
       </Row >

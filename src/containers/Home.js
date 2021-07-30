@@ -130,7 +130,7 @@ export default class Home extends Component {
         <Col md={4}>
           <TaleSideCardList
             loading={this.state.lastUpdateLoading}
-            variant="danger"
+            variant="primary"
             title="Truyện vừa cập nhật"
             list={this.state.lastUpdateList}
           />
