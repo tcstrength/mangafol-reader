@@ -10,7 +10,8 @@ export default class TaleSummary extends Component {
         userId: 0,
         taleCount: 0,
         taleReadingCount: 0,
-        taleDropCount: 0
+        taleDropCount: 0,
+        taleDoneCount: 0
       }
     }
   }
@@ -23,14 +24,15 @@ export default class TaleSummary extends Component {
 
   render() {
     return (
-      <Card className="p-1 pb-2 bg-secondary text-light">
+      <Card className="bg-secondary text-light">
         <Card.Body className="text-center">
-          <h5>Tổng truyện</h5>
+          <h5>Tổng {this.state.summary.taleCount} truyện</h5>
           <hr></hr>
-          <p>Theo dõi <strong>{this.state.summary.taleReadingCount}</strong> truyện</p>
-          <p>Drop <strong>{this.state.summary.taleDropCount}</strong> truyện</p>
+          <p className="mb-2">Theo dõi <strong style={{ color: "#62ddbd" }}>{this.state.summary.taleReadingCount}</strong> truyện</p>
+          <p className="mb-2">Ngưng theo dõi <strong style={{ color: "#f76d82" }}>{this.state.summary.taleDropCount}</strong> truyện</p>
+          <p className="mb-1">Đã đọc xong <strong style={{ color: "#73b1f4" }}>{this.state.summary.taleDoneCount}</strong> truyện</p>
         </Card.Body>
-      </Card>
+      </Card >
     )
   }
 }
