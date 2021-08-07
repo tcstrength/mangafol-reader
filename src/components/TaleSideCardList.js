@@ -5,19 +5,19 @@ function TaleSideCardList(props) {
   const list = props.list;
   const variant = props.variant;
   const title = props.title;
-  const classVariant = `p-0 mb-3 border-${variant} text-${variant}`
+  const classVariant = `p-0 mb-3 border-${variant} bg-${variant} text-light`
   const loading = (props.loading === null) ? false : props.loading;
 
   return (
     <>
       <Card className={classVariant}>
-        <Card.Body className="text-center">
+        <Card.Body>
           <Card.Title style={{ textTransform: "capitalize", padding: 0, margin: 0 }}>{title}</Card.Title>
         </Card.Body>
       </Card>
 
       {loading &&
-        <div className="w-100 text-center">
+        <div className="w-100 text-center pt-2 pb-4">
           <Loading size="md" />
         </div>
       }

@@ -66,7 +66,7 @@ function TaleCard(props) {
         <Row>
 
           <Col sm={4}>
-            <Card.Img height="180px" src={transferFeaturedImg(tale.featuredImg)}
+            <Card.Img height="140px" src={transferFeaturedImg(tale.featuredImg)}
               style={{ objectFit: "cover" }}>
 
             </Card.Img>

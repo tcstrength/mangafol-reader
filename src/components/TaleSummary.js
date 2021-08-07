@@ -25,7 +25,7 @@ export default class TaleSummary extends Component {
   render() {
     return (
       <Card className="bg-secondary text-light">
-        <Card.Body className="text-center">
+        <Card.Body>
           <h5>Tổng {this.state.summary.taleCount} truyện</h5>
           <hr></hr>
           <p className="mb-2">Theo dõi <strong style={{ color: "#62ddbd" }}>{this.state.summary.taleReadingCount}</strong> truyện</p>

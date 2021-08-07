@@ -108,7 +108,7 @@ export default class Home extends Component {
                 onNewSubmit={this.onNewSubmit} />
             </Col>
           </Row>
-          <br></br>
+          {/* <br></br> */}
           {/* <TaleCardList
             bg="secondary"
             title="Truyện được đánh giá hay"
@@ -133,8 +133,8 @@ export default class Home extends Component {
         <Col md={4}>
           <TaleSideCardList
             loading={this.state.lastUpdateLoading}
-            variant="primary"
-            title="Truyện vừa cập nhật"
+            variant="success"
+            title="Truyện vừa đọc"
             list={this.state.lastUpdateList}
           />
           <TaleSideCardList

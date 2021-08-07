@@ -5,17 +5,17 @@ export const axiosBaseUrl = "https://mangafol-api.herokuapp.com/api"
 export const mapReadingStatus = (status) => {
   if (status === 1) {
     return {
-      text: 'Đang đọc',
+      text: 'Đang theo dõi',
       variant: 'success'
     }
   } else if (status === 2) {
     return {
-      text: 'Xong',
-      variant: 'secondary'
+      text: 'Đọc xong',
+      variant: 'primary'
     }
   } else {
     return {
-      text: 'Ngưng',
+      text: 'Ngừng theo dõi',
       variant: 'danger'
     }
   }
@@ -25,12 +25,12 @@ export const mapTaleFinished = (finished) => {
   if (!finished) {
     return {
       text: 'Đang viết',
-      variant: 'primary'
+      variant: 'success'
     }
   } else {
     return {
       text: 'Đã xong',
-      variant: 'success'
+      variant: 'primary'
     }
   }
 }

@@ -68,7 +68,7 @@ function TaleCard(props) {
           className="embed-responsive-item"
           src={transferFeaturedImg(tale.featuredImg)} />
         <Card.Body>
-          <Card.Title className="mb-0 text-truncate h5">{tale.title}</Card.Title>
+          <Card.Title className="mb-0 text-truncate h6">{tale.title}</Card.Title>
           <Card.Text className="mb-0"><small className="text-muted">{timeSince(tale.ut)}</small></Card.Text>
           <Card.Text className="mb-1">
             <small>
