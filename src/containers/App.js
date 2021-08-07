@@ -7,13 +7,14 @@ import Login from "./Login";
 import Logout from "./Logout";
 import Register from "./Register";
 import Home from "./Home";
+import Profile from "./Profile";
 import TaleDetails from "./TaleDetails";
 
 export default class App extends Component {
   constructor(props) {
     super(props)
-
   }
+
   render() {
     var content = (
       <Switch>
@@ -21,6 +22,8 @@ export default class App extends Component {
         <Route path="/register" component={Register} />
         <Route path="/logout" component={Logout} />
         <Route path="/tales/:slug" component={TaleDetails} />
+        <Route path="/profile/:id" component={Profile} />
+        <Route path="/profile" component={Profile} />
         <Route path="/" component={Home} />
       </Switch>
     )
@@ -30,6 +33,7 @@ export default class App extends Component {
         <Switch>
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/profile/:id" component={Profile} />
           <Route path="/" component={Login} />
         </Switch>
       )

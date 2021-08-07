@@ -21,9 +21,11 @@ export default class Home extends Component {
       lastUpdateList: [],
       lastUpdateLoading: false,
       topList: [],
+      topOffset: -1,
+      topLimit: 5,
       topLoading: false,
       offset: -1,
-      limit: 12,
+      limit: 24,
       reachEnd: false
     }
   }
@@ -37,7 +39,7 @@ export default class Home extends Component {
 
   updateLastUpdateList() {
     this.setState({ lastUpdateLoading: true })
-    TaleActions.lastUpdate(10).then((resp) => {
+    TaleActions.lastUpdate(5).then((resp) => {
       this.setState({ lastUpdateList: resp.data.content.list, lastUpdateLoading: false })
     })
   }
@@ -83,6 +85,7 @@ export default class Home extends Component {
         ]
       })
       this.updateTopList();
+      this.updateLastUpdateList();
     }).catch((resp) => {
       this.setState({ creating: false })
     })
@@ -106,16 +109,16 @@ export default class Home extends Component {
             </Col>
           </Row>
           <br></br>
-          <TaleCardList
+          {/* <TaleCardList
             bg="secondary"
             title="Truyện được đánh giá hay"
             variant="light"
             loading={this.state.topLoading}
             list={this.state.topList} />
-          <br></br>
+          <br></br> */}
           <TaleCardList
             bg="secondary"
-            title="Truyện gần đây"
+            title="Truyện của bạn"
             variant="light"
             list={this.state.recentList} />
           <div className="text-center pb-3">
@@ -133,6 +136,12 @@ export default class Home extends Component {
             variant="primary"
             title="Truyện vừa cập nhật"
             list={this.state.lastUpdateList}
+          />
+          <TaleSideCardList
+            loading={this.state.topLoading}
+            variant="danger"
+            title="Truyện yêu thích"
+            list={this.state.topList}
           />
         </Col>
       </Row>
