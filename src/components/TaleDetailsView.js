@@ -71,6 +71,7 @@ function TaleDetailsView(props) {
 
     return (
       <li className={`${pt} align-middle`} key="status"
+        style={{ cursor: "pointer" }}
         onMouseUp={e => setReadingStatusOptionsShow(true)}
         onMouseLeave={e => setReadingStatusOptionsShow(false)}>
         <img alt="" src={FlagIcon} width="20" className="align-middle" />
@@ -93,6 +94,7 @@ function TaleDetailsView(props) {
 
     return (
       <li className={`${pt} align-middle`} key="finished"
+        style={{ cursor: "pointer" }}
         onMouseUp={e => setTaleFinishedOptionsShow(true)}
         onMouseLeave={e => setTaleFinishedOptionsShow(false)}>
         <img alt="" src={FinishedIcon} width="20" className="align-middle" />
