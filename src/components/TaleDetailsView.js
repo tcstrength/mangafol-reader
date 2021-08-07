@@ -22,6 +22,8 @@ function TaleDetailsView(props) {
   const pt = "pt-3";
 
   const [showLinkGuid, setShowLinkGuid] = useState(false)
+  const [readingStatusOptionsShow, setReadingStatusOptionsShow] = useState(false)
+  const [taleFinishedOptionsShow, setTaleFinishedOptionsShow] = useState(false)
 
   const transferDescription = (description) => {
     if (description === '') {
@@ -59,25 +61,44 @@ function TaleDetailsView(props) {
 
   const renderReadingStatus = (readingStatus) => {
     var map = mapReadingStatus(readingStatus)
-    var badge = <Badge className={`bg-${map.variant} rounded-pill align-middle`}>{map.text}</Badge>;
+    var badge = <Badge className={`bg-${map.variant} rounded-pill align-middle mr-1`}>{map.text}</Badge>;
+
+    var remaining = [1, 0, 2].filter(item => item !== readingStatus)
+    var remainingBadges = remaining.map((item) => {
+      var map = mapReadingStatus(item)
+      return <a href="#" onClick={e => props.onReadingStatusUpdate(item)}><Badge className={`bg-${map.variant} rounded-pill align-middle mr-1`}>{map.text}</Badge></a >
+    });
 
     return (
-      <li className={`${pt} align-middle`} key="status">
+      <li className={`${pt} align-middle`} key="status"
+        onMouseUp={e => setReadingStatusOptionsShow(true)}
+        onMouseLeave={e => setReadingStatusOptionsShow(false)}>
         <img alt="" src={FlagIcon} width="20" className="align-middle" />
         <b className="mx-1 align-middle">Tình trạng đọc:</b>
         {badge}
+        {readingStatusOptionsShow && remainingBadges}
       </li>
     )
   }
 
   const renderStatus = (finished) => {
     var map = mapTaleFinished(finished)
-    var badge = <Badge className={`bg-${map.variant} rounded-pill align-middle`}>{map.text}</Badge>;
+    var badge = <Badge className={`bg-${map.variant} rounded-pill align-middle mr-1`}>{map.text}</Badge>;
+
+    var remaining = [false, true].filter(item => item !== finished)
+    var remainingBadges = remaining.map((item) => {
+      var map = mapTaleFinished(item)
+      return <a href="#" onClick={e => props.onTaleFinishedUpdate(item)}><Badge className={`bg-${map.variant} rounded-pill align-middle mr-1`}>{map.text}</Badge></a >
+    });
+
     return (
-      <li className={`${pt} align-middle`} key="finished">
+      <li className={`${pt} align-middle`} key="finished"
+        onMouseUp={e => setTaleFinishedOptionsShow(true)}
+        onMouseLeave={e => setTaleFinishedOptionsShow(false)}>
         <img alt="" src={FinishedIcon} width="20" className="align-middle" />
         <b className="mx-1 align-middle">Tình trạng truyện:</b>
         {badge}
+        {taleFinishedOptionsShow && remainingBadges}
       </li>
     )
   }
@@ -114,6 +135,7 @@ function TaleDetailsView(props) {
           style={{ width: "80px", marginRight: "10px" }}
           value={chapter}
           onKeyDown={props.onChapterUpdate}
+          onBlur={props.onChapterUpdate}
           onChange={props.onChapterChange} />
       </li>
     )

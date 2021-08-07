@@ -77,9 +77,9 @@ function TaleAdvanceDialog(props) {
           </Form.Group>
 
           <Form.Group className="mb-2 d-flex" controlId="author">
-            <Form.Control className="w-50" required style={{ marginRight: "6px" }} type="text" placeholder="Tác giả" value={tale.author}
+            <Form.Control required style={{ marginRight: "6px" }} type="text" placeholder="Tác giả" value={tale.author}
               onChange={(e) => { setTale({ ...tale, author: e.target.value }) }} />
-            <ButtonGroup className="w-50">
+            {/* <ButtonGroup className="w-50">
               {finishedRadios.map((radio, idx) => (
                 <ToggleButton
                   className="w-50 btn"
@@ -95,10 +95,10 @@ function TaleAdvanceDialog(props) {
                   {radio.name}
                 </ToggleButton>
               ))}
-            </ButtonGroup>
+            </ButtonGroup> */}
           </Form.Group>
 
-          <Form.Group className="mb-2" controlId="readingStatus">
+          {/* <Form.Group className="mb-2" controlId="readingStatus">
             <ButtonGroup className="w-100">
               {readingRadios.map((radio, idx) => (
                 <ToggleButton
@@ -116,7 +116,7 @@ function TaleAdvanceDialog(props) {
                 </ToggleButton>
               ))}
             </ButtonGroup>
-          </Form.Group>
+          </Form.Group> */}
 
           <Form.Group controlId="linkPattern" className="mb-2">
             <Form.Control required type="text" as="textarea"

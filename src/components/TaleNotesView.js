@@ -5,7 +5,17 @@ import { TaleActions } from "../actions/ApiCalls";
 import TaleNotes from "./TaleNotes";
 
 function TaleNotesView(props) {
-  const list = props.list;
+  var list = props.list;
+
+  if (list === null || list === undefined || list.length === 0) {
+    list = [{
+      id: null,
+      taleId: 0,
+      chapter: 1,
+      content: "Chưa có ghi chú nào, bạn có thể sử dụng ghi chú để cập nhật chương đang đọc",
+      ct: new Date().getTime()
+    }]
+  }
 
   return (
     <>
