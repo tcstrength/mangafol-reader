@@ -47,7 +47,7 @@ function TaleAdvanceDialog(props) {
     }
   })
 
-  const readingRadios = [0, 1, 2].map((item) => {
+  const readingRadios = [1, 2, 0].map((item) => {
     const map = mapReadingStatus(item)
     return {
       name: map.text, value: item.toString(), variant: `outline-${map.variant}`
