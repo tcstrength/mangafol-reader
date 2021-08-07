@@ -6,6 +6,7 @@ function TaleNotesDialog(props) {
   const { tale } = props;
 
   const [notes, setNotes] = useState({
+    id: null,
     taleId: tale.id,
     chapter: tale.chapter,
     content: ""

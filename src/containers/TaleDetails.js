@@ -35,7 +35,7 @@ export default class TaleDetails extends Component {
 
   updateTopList() {
     this.setState({ lastUpdateLoading: true })
-    const promise = TaleActions.lastUpdate(10);
+    const promise = TaleActions.lastUpdate(5);
     promise.then((resp) => {
       this.setState({ lastUpdateList: resp.data.content.list, loading: false, lastUpdateLoading: false })
     }).catch((resp) => {
@@ -73,7 +73,7 @@ export default class TaleDetails extends Component {
   }
 
   onChapterUpdate = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === undefined || e.key === 'Enter') {
       this.updateTale('Cập nhật chương truyện ' + this.state.tale.chapter,
         { chapter: this.state.tale.chapter });
     }
@@ -146,6 +146,16 @@ export default class TaleDetails extends Component {
     this.refreshTale(false);
   }
 
+  onReadingStatusUpdate = (newStatus) => {
+    this.setState({ updating: true })
+    this.updateTale('Đổi tình trạng đọc', { readingStatus: newStatus })
+  }
+
+  onTaleFinishedUpdate = (newStatus) => {
+    this.setState({ updating: true })
+    this.updateTale('Đổi tình trạng truyện', { taleFinished: newStatus })
+  }
+
   render() {
     return (
       <Row>
@@ -193,8 +203,10 @@ export default class TaleDetails extends Component {
                 onAdvanceClick={this.onAdvanceClick}
                 onChapterUpdate={this.onChapterUpdate}
                 onChapterChange={this.onChapterChange}
+                onReadingStatusUpdate={this.onReadingStatusUpdate}
+                onTaleFinishedUpdate={this.onTaleFinishedUpdate}
                 onRatingClick={this.onRatingClick}
-                onUploadClick={this.onUploadClick}
+                // onUploadClick={this.onUploadClick}
                 onNotesClick={() => { this.setState({ notesShow: true }) }}
               />
 

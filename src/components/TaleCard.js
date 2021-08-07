@@ -58,8 +58,16 @@ function TaleCard(props) {
     readButton = <a href={`/tales/${tale.slug}`} className="btn btn-primary">Truy cập</a>
   }
 
+  var cardStyle = {}
+
+  if (tale.readingStatus === 0) {
+    cardStyle = { backgroundColor: "#FFF0F0" }
+  } else if (tale.readingStatus === 2) {
+    cardStyle = { backgroundColor: "#F0F0FF" }
+  }
+
   return (
-    <Card className="p-0 mb-3">
+    <Card className="p-0 mb-3" style={cardStyle}>
       <a href={`/tales/${tale.slug}`} style={{ color: "inherit", textDecoration: "none" }}>
         <Card.Img
           height="200px"

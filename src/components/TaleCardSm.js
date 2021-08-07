@@ -2,6 +2,8 @@ import { Card, Col, Row, Badge } from "react-bootstrap";
 import { featured } from "../constants/Images";
 import { useState } from "react";
 import { timeSince } from "../utils/DateUtils";
+import { mapTaleFinished, mapReadingStatus } from "../constants/Config";
+
 function TaleCard(props) {
   const transferDescription = (description) => {
     if (description === '') {
@@ -37,30 +39,29 @@ function TaleCard(props) {
   }
 
   const renderReadingStatus = (readingStatus) => {
-    var badge = <Badge className="bg-danger rounded-pill">Ngưng</Badge>;
-
-    if (readingStatus === 1) {
-      badge = <Badge className="bg-success rounded-pill">Đang đọc</Badge>;
-    } else if (readingStatus === 2) {
-      badge = <Badge className="bg-secondary rounded-pill">Đã đọc xong</Badge>;
-    }
-
+    var map = mapReadingStatus(readingStatus);
+    var badge = <Badge className={`bg-${map.variant} rounded-pill`}>{map.text}</Badge>;
     return badge;
   }
 
   const renderStatus = (finished) => {
-    var badge = <Badge className="bg-primary rounded-pill">Đang tiến hành</Badge>;
-
-    if (finished) {
-      badge = <Badge className="bg-success rounded-pill">Hoàn thành</Badge>;
-    }
+    var map = mapTaleFinished(finished)
+    var badge = <Badge className={`bg-${map.variant} rounded-pill`}>{map.text}</Badge>;
     return badge;
   }
 
   var { tale } = props;
 
+  var cardStyle = {}
+
+  if (tale.readingStatus === 0) {
+    cardStyle = { backgroundColor: "#FFF0F0" }
+  } else if (tale.readingStatus === 2) {
+    cardStyle = { backgroundColor: "#F0F0FF" }
+  }
+
   return (
-    <Card className="mb-3">
+    <Card className="mb-3" style={cardStyle}>
       <a href={`/tales/${tale.slug}`} style={{ color: "inherit", textDecoration: "none" }}>
 
         <Row>
