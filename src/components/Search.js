@@ -4,7 +4,7 @@ import { throttle } from 'throttle-debounce';
 import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
 import { TaleActions } from "../actions/ApiCalls";
-import { getTaleLink } from "../constants/Config";
+import { getTaleLink, mapReadingStatus } from "../constants/Config";
 import Loading from "./Loading";
 
 var keyword = "";
@@ -12,6 +12,7 @@ var keyword = "";
 function Search(props) {
   const [list, setList] = useState([])
   const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState(false)
 
   const searchText = throttle(500, false, (e) => {
     const text = e.target.value;
@@ -32,10 +33,25 @@ function Search(props) {
     }
   });
 
+  const mapReadingStatusCustom = (status) => {
+    var map = mapReadingStatus(status)
+
+    if (status === 1) {
+      return {
+        text: 'Theo dõi',
+        variant: 'dark'
+      }
+    }
+
+    return map;
+  }
+
   return (
     <>
       <Dropdown>
-        <InputGroup size="mr-3" onChange={searchText}>
+        <InputGroup size="mr-3" onChange={searchText}
+          onFocus={e => { setShow(true) }}
+          onBlur={e => { setShow(false) }}>
           <FormControl className="pt-1" type="text" placeholder="Tìm truyện" />
           <InputGroup.Text >
             {!loading && <img
@@ -44,11 +60,11 @@ function Search(props) {
             {' '}
           </InputGroup.Text>
         </InputGroup>
-        {list.length !== 0 &&
-          <div className="dropdown-menu mt-1 show" aria-labelledby="example-two-button">
+        {show && list.length !== 0 &&
+          <div className="dropdown-menu mt-1 show" aria-labelledby="tale-search">
             <div className="hs-menu-inner">
               {list.map((item) => {
-                return <a className="dropdown-item" data-value={item.id} href={getTaleLink(item)}>
+                return <a className={`dropdown-item text-${mapReadingStatusCustom(item.readingStatus).variant}`} data-value={item.id} href={getTaleLink(item)}>
                   {item.title}
                   <br></br>
                   <small className="text-muted">Chương {item.chapter}</small>

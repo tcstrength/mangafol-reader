@@ -219,11 +219,17 @@ export default class TaleDetails extends Component {
         </Col>
         <Col md={4}>
           <TaleSideCardList
-            variant="danger"
-            title="Truyện vừa cập nhật"
             loading={this.state.lastUpdateLoading}
+            variant="success"
+            title="Truyện vừa đọc"
             list={this.state.lastUpdateList}
           />
+          {/* <TaleSideCardList
+            loading={this.state.topLoading}
+            variant="danger"
+            title="Truyện yêu thích"
+            list={this.state.topList}
+          /> */}
         </Col>
       </Row>
     )
