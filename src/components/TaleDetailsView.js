@@ -1,6 +1,6 @@
 import { Badge, Row, Col, Form, Button, ButtonGroup } from "react-bootstrap"
 import { featured } from "../constants/Images";
-import { mapReadingStatus, mapTaleFinished } from "../constants/Config";
+import { mapReadingStatus, mapTaleFinished, mapRating } from "../constants/Config";
 import AuthorIcon from "../resources/author.svg";
 import FinishedIcon from "../resources/finished.svg";
 import FlagIcon from "../resources/flag.svg";
@@ -106,19 +106,10 @@ function TaleDetailsView(props) {
   }
 
   const renderRating = (rating) => {
-    var badge = <Badge className="bg-secondary rounded-pill align-middle">Chưa đánh giá</Badge>
-    var text = `${rating}/10`;
-
-    if (rating >= 7) {
-      badge = <Badge className="bg-success rounded-pill align-middle">{text}</Badge>
-    } else if (rating >= 5) {
-      badge = <Badge className="bg-warning rounded-pill align-middle">{text}</Badge>
-    } else if (rating > 0) {
-      badge = <Badge className="bg-danger rounded-pill align-middle">{text}</Badge>
-    }
-
+    var map = mapRating(rating)
+    var badge = <Badge className={`bg-${map.variant} rounded-pill align-middle`}>{map.text}</Badge>
     return (
-      <li className={pt} key="rating">
+      <li className={pt} key="rating" style={{ cursor: "pointer" }} onClick={props.onRatingClick}>
         <img alt="" src={RatingIcon} width="20" className="align-middle" />
         <b className="mx-1 align-middle">Đánh giá:</b>
         {badge}
