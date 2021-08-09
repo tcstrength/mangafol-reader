@@ -14,7 +14,7 @@ function Search(props) {
   const [loading, setLoading] = useState(false)
   const [show, setShow] = useState(false)
 
-  const searchText = throttle(500, false, (e) => {
+  const searchText = throttle(250, false, (e) => {
     const text = e.target.value;
     keyword = text;
 
