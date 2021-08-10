@@ -13,6 +13,7 @@ function Search(props) {
   const [list, setList] = useState([])
   const [loading, setLoading] = useState(false)
   const [show, setShow] = useState(false)
+  const [hover, setHover] = useState(false)
 
   const searchText = throttle(250, false, (e) => {
     const text = e.target.value;
@@ -46,12 +47,20 @@ function Search(props) {
     return map;
   }
 
+
+  const handleOnBlur = () => {
+    if (hover === false) {
+      setShow(false);
+    } else {
+    }
+  }
+
   return (
     <>
       <Dropdown>
         <InputGroup size="mr-3" onChange={searchText}
-          onFocus={e => { setShow(true) }}
-          onBlur={e => { setShow(false) }}>
+          onBlur={e => { handleOnBlur() }}
+          onFocus={e => { setShow(true) }}>
           <FormControl className="pt-1" type="text" placeholder="Tìm truyện" />
           <InputGroup.Text >
             {!loading && <img
@@ -61,7 +70,9 @@ function Search(props) {
           </InputGroup.Text>
         </InputGroup>
         {show && list.length !== 0 &&
-          <div className="dropdown-menu mt-1 show" aria-labelledby="tale-search">
+          <div className="dropdown-menu mt-1 show" aria-labelledby="tale-search"
+            onMouseEnter={e => { setHover(true) }}
+            onMouseLeave={e => { setHover(false) }}>
             <div className="hs-menu-inner">
               {list.map((item) => {
                 return <a className={`dropdown-item text-${mapReadingStatusCustom(item.readingStatus).variant}`} data-value={item.id} href={getTaleLink(item)}>
