@@ -59,6 +59,9 @@ export const UserActions = {
   }),
   summary: async () => api.get("/user/summary", {
     headers: authHeader
+  }),
+  feedback: async (body) => api.post("/user/feedback", body, {
+    headers: authHeader
   })
 }
 
