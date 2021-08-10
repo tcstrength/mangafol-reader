@@ -8,6 +8,7 @@ import Logout from "./Logout";
 import Register from "./Register";
 import Home from "./Home";
 import Profile from "./Profile";
+import Public from "./Public";
 import TaleDetails from "./TaleDetails";
 
 export default class App extends Component {
@@ -22,7 +23,7 @@ export default class App extends Component {
         <Route path="/register" component={Register} />
         <Route path="/logout" component={Logout} />
         <Route path="/tales/:slug" component={TaleDetails} />
-        <Route path="/profile/:id" component={Profile} />
+        <Route path="/public/:uname" component={Public} />
         <Route path="/profile" component={Profile} />
         <Route path="/" component={Home} />
       </Switch>
