@@ -130,6 +130,13 @@ export const TaleActions = {
       taleId: id
     },
     headers: authHeader
+  }),
+  getPublicPaging: async (offset, limit, uname) => api.get("public/tale/paging", {
+    params: {
+      offset: offset,
+      limit: limit,
+      uname: uname
+    }
   })
 }
 

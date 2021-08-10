@@ -2,6 +2,7 @@ import { Component } from "react";
 import { Card, Row, Col } from "react-bootstrap";
 import Loading from "./Loading";
 import { UserActions } from "../actions/ApiCalls";
+import { getPublicLink } from "../constants/Config";
 
 export default class RankList extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class RankList extends Component {
           {id + 1}
         </Col>
         <Col md={5} className="text-primary">
-          {item.uname}
+          <a target="_blank" href={getPublicLink(item.uname)}>{item.uname}</a>
         </Col>
         <Col md={6}>
           <strong>{item.taleCount}</strong> truyện

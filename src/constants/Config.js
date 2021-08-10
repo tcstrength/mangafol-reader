@@ -63,3 +63,7 @@ export const mapRating = (rating) => {
 export const getTaleLink = (tale) => {
   return '/tales/' + tale.slug;
 }
+
+export const getPublicLink = (uname) => {
+  return '/public/' + uname;
+}
