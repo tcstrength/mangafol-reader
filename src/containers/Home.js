@@ -8,6 +8,7 @@ import TaleSideCardList from "../components/TaleSideCardList";
 import TaleCardList from "../components/TaleCardList";
 import TaleSummary from "../components/TaleSummary";
 import { List } from "css-tree";
+import RankList from "../components/RankList";
 
 export default class Home extends Component {
   constructor(props) {
@@ -131,6 +132,9 @@ export default class Home extends Component {
           </div>
         </Col>
         <Col md={4}>
+          <RankList>
+
+          </RankList>
           <TaleSideCardList
             loading={this.state.lastUpdateLoading}
             variant="success"

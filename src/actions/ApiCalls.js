@@ -62,7 +62,8 @@ export const UserActions = {
   }),
   feedback: async (body) => api.post("/user/feedback", body, {
     headers: authHeader
-  })
+  }),
+  rank: async () => api.get("/public/user/rank")
 }
 
 export const TaleActions = {
