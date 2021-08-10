@@ -11,6 +11,7 @@ function Header(props) {
   const [showFeedback, setShowFeedback] = useState(false);
 
   var user = Store.userProfile;
+  var login = false
   var profile = (
     <>
       <Nav.Link href="/login" className="d-flex">
@@ -23,6 +24,7 @@ function Header(props) {
   )
 
   if (user !== null && user !== undefined) {
+    login = true;
     profile = (
       <>
         <Nav.Link href="/logout" className="d-flex px-2">
@@ -38,11 +40,10 @@ function Header(props) {
 
   return (
     <Navbar collapseOnSelect className="shadow-lg rounded" expand="lg" bg="light" variant="light" sticky="top">
-      <FeedbackDialog
+      {login && <FeedbackDialog
         show={showFeedback}
         onHide={() => { setShowFeedback(false) }}>
-
-      </FeedbackDialog>
+      </FeedbackDialog>}
       <Container>
         <Navbar.Brand href="/">
           <img
