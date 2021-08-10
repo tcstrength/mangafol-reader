@@ -13,12 +13,12 @@ export default class Profile extends Component {
     const { id } = this.state;
     if (id === null || id === undefined || id == Store.userProfile.id) {
       return (
-        <p>Private profile</p>
+        <p>Đang cập nhật</p>
       )
     }
 
     return (
-      <p>Public profile</p>
+      <p>Đang cập nhật</p>
     )
   }
 }
