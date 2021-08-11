@@ -23,13 +23,13 @@ export default class RankList extends Component {
   renderItem(item, id) {
     return (
       <Row className="mb-2">
-        <Col md={1} className="text-muted">
+        <Col md={2} className="text-muted">
           {id + 1}
         </Col>
         <Col md={5} className="text-primary">
           <a target="_blank" href={getPublicLink(item.uname)}>{item.uname}</a>
         </Col>
-        <Col md={6}>
+        <Col md={5}>
           <strong>{item.taleCount}</strong> truyện
         </Col>
       </Row>
