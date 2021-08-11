@@ -60,15 +60,18 @@ function TaleCard(props) {
             <div className="d-flex flex-column justify-content-between h-100">
               <div>
                 <h6 className="py-0 my-0 text-truncate">{tale.title}</h6>
-                <small>
+                <small className="text-muted">
+                  {timeSince(tale.ut)}
+                </small>
+
+                <br></br>
+                <small className="mb-1">
                   {renderRating(tale.rating)}
                   <span className="pr-1"></span>
                   {renderReadingStatus(tale.readingStatus)}
                 </small>
                 <br></br>
-                <small className="text-muted">{timeSince(tale.ut)}</small>
-                <br></br>
-                <small>Chương <strong>{tale.chapter}</strong></small>
+                <p>Chương <strong>{tale.chapter}</strong></p>
               </div>
               {/* <a href={`/tales/${tale.slug}`} className="btn btn-outline-primary btn-sm w-100">Ghi chú</a> */}
             </div>

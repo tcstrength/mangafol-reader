@@ -77,3 +77,7 @@ export const mapReadingStatusToColor = (readingStatus) => {
 
   return "";
 }
+
+export const googleSearch = (title) => {
+  return "https://www.google.com/search?q=" + title;
+}

@@ -59,15 +59,16 @@ function TaleCard(props) {
           src={transferFeaturedImg(tale.featuredImg)} />
         <Card.Body>
           <Card.Title className="mb-0 text-truncate h6">{tale.title}</Card.Title>
-          <Card.Text className="mb-0"><small className="text-muted">
-            {timeSince(tale.ut)}
-            <span className="pr-1"></span>
-            {renderRating(tale.rating)}
-            <span className="pr-1"></span>
-            {renderReadingStatus(tale.readingStatus)}</small></Card.Text>
+          <Card.Text className="mb-0">
+            <small className="text-muted">
+              {timeSince(tale.ut)}
+            </small>
+          </Card.Text>
           <Card.Text className="mb-1">
             <small>
-
+              {renderRating(tale.rating)}
+              <span className="pr-1"></span>
+              {renderReadingStatus(tale.readingStatus)}
             </small>
           </Card.Text>
           <Card.Text className="my-0">

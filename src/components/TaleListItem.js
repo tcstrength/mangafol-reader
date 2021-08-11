@@ -1,7 +1,7 @@
 import { timeSince } from "../utils/DateUtils";
 import { featured } from "../constants/Images";
 import { Row, Col, Card, Badge } from "react-bootstrap";
-import { mapReadingStatus, mapTaleFinished, mapReadingStatusToColor } from "../constants/Config";
+import { mapReadingStatus, mapTaleFinished, mapReadingStatusToColor, googleSearch } from "../constants/Config";
 
 function TaleListItem(props) {
   const renderReadingStatus = (readingStatus) => {
@@ -52,7 +52,7 @@ function TaleListItem(props) {
             style={{ objectFit: "cover" }}>
           </Card.Img>
         </Col>
-        <Col md={8} className="p-2">
+        <Col md={7} className="p-2">
           <Card.Text className="mb-0">
             <h6>{item.title}</h6>
           </Card.Text>
@@ -66,6 +66,9 @@ function TaleListItem(props) {
           <Card.Text>
             Chương <strong>{item.chapter}</strong>
           </Card.Text>
+        </Col>
+        <Col md={3} className="p-2">
+          <a target="_blank" href={googleSearch(item.title)}>Tìm trên Google</a>
         </Col>
       </Row>
 
