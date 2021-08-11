@@ -38,7 +38,7 @@ export const mapTaleFinished = (finished) => {
 export const mapRating = (rating) => {
   if (rating === 0) {
     return {
-      text: 'Chưa đánh giá',
+      text: 'Chưa rõ',
       variant: 'secondary'
     }
   }
@@ -66,4 +66,14 @@ export const getTaleLink = (tale) => {
 
 export const getPublicLink = (uname) => {
   return '/public/' + uname;
+}
+
+export const mapReadingStatusToColor = (readingStatus) => {
+  if (readingStatus === 0) {
+    return "#FFF0F0";
+  } else if (readingStatus === 2) {
+    return "#F0F0FF";
+  }
+
+  return "";
 }

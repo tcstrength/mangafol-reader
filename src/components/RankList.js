@@ -3,6 +3,7 @@ import { Card, Row, Col } from "react-bootstrap";
 import Loading from "./Loading";
 import { UserActions } from "../actions/ApiCalls";
 import { getPublicLink } from "../constants/Config";
+import { mapReadingStatusToColor } from "../constants/Config";
 
 export default class RankList extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import { Card, Col, Row, Badge, Button, ButtonGroup } from "react-bootstrap";
 import { featured } from "../constants/Images";
-import { mapReadingStatus, mapTaleFinished } from "../constants/Config";
+import { mapReadingStatus, mapTaleFinished, mapReadingStatusToColor, mapRating } from "../constants/Config";
 import { useState } from "react";
 import { timeSince } from "../utils/DateUtils";
 
@@ -22,19 +22,8 @@ function TaleCard(props) {
   }
 
   const renderRating = (rating) => {
-    var badge = <Badge className="bg-secondary rounded-pill">Chưa đánh giá</Badge>
-    var text = `${rating}/10`;
-
-    // console.log(text)
-
-    if (rating >= 7) {
-      badge = <Badge className="bg-success rounded-pill">{text}</Badge>
-    } else if (rating >= 5) {
-      badge = <Badge className="bg-warning rounded-pill">{text}</Badge>
-    } else if (rating > 0) {
-      badge = <Badge className="bg-danger rounded-pill">{text}</Badge>
-    }
-
+    var map = mapRating(rating)
+    var badge = <Badge className={`bg-${map.variant} rounded-pill align-middle`}>{map.text}</Badge>
     return badge;
   }
 
@@ -58,14 +47,7 @@ function TaleCard(props) {
     readButton = <a href={`/tales/${tale.slug}`} className="btn btn-primary">Truy cập</a>
   }
 
-  var cardStyle = {}
-
-  if (tale.readingStatus === 0) {
-    cardStyle = { backgroundColor: "#FFF0F0" }
-  } else if (tale.readingStatus === 2) {
-    cardStyle = { backgroundColor: "#F0F0FF" }
-  }
-
+  var cardStyle = { backgroundColor: mapReadingStatusToColor(tale.readingStatus) }
   return (
     <Card className="p-0 mb-3" style={cardStyle}>
       <a href={`/tales/${tale.slug}`} style={{ color: "inherit", textDecoration: "none" }}>
@@ -77,12 +59,15 @@ function TaleCard(props) {
           src={transferFeaturedImg(tale.featuredImg)} />
         <Card.Body>
           <Card.Title className="mb-0 text-truncate h6">{tale.title}</Card.Title>
-          <Card.Text className="mb-0"><small className="text-muted">{timeSince(tale.ut)}</small></Card.Text>
+          <Card.Text className="mb-0"><small className="text-muted">
+            {timeSince(tale.ut)}
+            <span className="pr-1"></span>
+            {renderRating(tale.rating)}
+            <span className="pr-1"></span>
+            {renderReadingStatus(tale.readingStatus)}</small></Card.Text>
           <Card.Text className="mb-1">
             <small>
-              {renderRating(tale.rating)}
-              <span className="pr-1"></span>
-              {renderReadingStatus(tale.readingStatus)}
+
             </small>
           </Card.Text>
           <Card.Text className="my-0">
