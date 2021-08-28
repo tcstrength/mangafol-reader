@@ -1,6 +1,6 @@
 import { timeSince } from "../utils/DateUtils";
 import { featured } from "../constants/Images";
-import { Row, Col, Card, Badge } from "react-bootstrap";
+import { Row, Col, Card, Badge, Button } from "react-bootstrap";
 import { mapReadingStatus, mapTaleFinished, mapReadingStatusToColor, googleSearch } from "../constants/Config";
 
 function TaleListItem(props) {
@@ -68,7 +68,10 @@ function TaleListItem(props) {
           </Card.Text>
         </Col>
         <Col md={3} className="p-2">
-          <a target="_blank" href={googleSearch(item.title)}>Tìm trên Google</a>
+          <a target="_blank">Sao chép</a>
+          <span className="pr-3"></span>
+          <a target="_blank" href={googleSearch(item.title)}>Google</a>
+          {/* <Button>Thêm truyện</Button> */}
         </Col>
       </Row>
 

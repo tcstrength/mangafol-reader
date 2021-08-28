@@ -19,11 +19,16 @@ api.interceptors.response.use(
 
     if (error.response !== null && error.response !== undefined) {
       const status = error.response.status;
+
       if (status === 401 || status == 403) {
         window.location.href = "/login"
       }
+      // else {
+      //   window.location.href = "/error"
+      // }
 
     }
+
     return Promise.reject(error);
   }
 );
@@ -74,6 +79,12 @@ export const TaleActions = {
     params: {
       text: text,
       limit: limit
+    },
+    headers: authHeader
+  }),
+  external: async (text) => api.get("/tale/external", {
+    params: {
+      text: text
     },
     headers: authHeader
   }),
