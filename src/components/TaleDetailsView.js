@@ -134,7 +134,7 @@ function TaleDetailsView(props) {
     )
   }
 
-  var readNowBtn = <a href={tale.linkDisplay} className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
+  var readNowBtn = <a href={tale.linkDisplay} target="_blank" className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
 
   if (tale.linkDisplay === '') {
     readNowBtn = <a href="javascript:void(0)" onClick={() => { setShowLinkGuid(true) }} className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
