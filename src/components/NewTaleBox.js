@@ -44,7 +44,6 @@ function NewTaleBox(props) {
               id="async-new-tale"
               isLoading={isLoading}
               labelKey="title"
-              clearButton={true}
               emptyLabel="Không có gợi ý..."
               promptText="Gõ tên truyện"
               searchText="Đang tìm..."

@@ -67,7 +67,6 @@ function Search(props) {
         emptyLabel="Không tìm thấy truyện nào..."
         promptText="Gõ tên truyện"
         searchText="Đang tìm..."
-        clearButton={true}
         minLength={1}
         onSearch={handleSearch}
         onChange={handleChange}
