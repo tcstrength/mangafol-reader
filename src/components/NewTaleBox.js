@@ -9,9 +9,13 @@ import { Fragment } from "react";
 function NewTaleBox(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [options, setOptions] = useState([]);
+  const [query, setQuery] = useState("")
   const filterBy = () => true;
 
   const handleSearch = (query) => {
+    props.onTitleChange({ target: { value: query } });
+    setQuery(query);
+
     TaleActions.searchTitle(query, 10).then((resp) => {
       const options = resp.data.content.list.map((item) => {
         return {
@@ -22,21 +26,18 @@ function NewTaleBox(props) {
     })
   }
 
-  const handleChange = (option) => {
-    const e = {
-      target: {
-        value: option.title
-      }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (query !== "") {
+      props.onNewSubmit(e)
     }
-
-    props.onTitleChange(e);
   }
 
   return (
     <Card className="p-0 mb-3">
       <Card.Body className="text-center">
         <Card.Title>Bạn có truyện mới?</Card.Title>
-        <Form className="mt-3" onSubmit={(e) => { e.preventDefault(); props.onNewSubmit(e) }}>
+        <Form className="mt-3" onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="title">
             {/* <Form.Control required type="text" placeholder="Tên truyện" onChange={e => { searchText(e); props.onTitleChange(e) }} /> */}
             <AsyncTypeahead
@@ -48,7 +49,6 @@ function NewTaleBox(props) {
               promptText="Gõ tên truyện"
               searchText="Đang tìm..."
               minLength={1}
-              onChange={handleChange}
               onSearch={handleSearch}
               options={options}
               placeholder="Tên truyện mới..."
