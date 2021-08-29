@@ -1,4 +1,4 @@
-// export const axiosBaseUrl = "http://45.76.144.94:8080/"
+// export const axiosBaseUrl = "http://localhost:8080/"
 export const axiosBaseUrl = "https://mangafol-api.tk/api"
 // https://mangafol-api.herokuapp.com/swagger-ui/index.html
 
