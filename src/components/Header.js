@@ -52,7 +52,7 @@ function Header(props) {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto w-25">
+          <Nav className="me-auto w-25 d-inline-block">
             <Search />
           </Nav>
           <Nav>

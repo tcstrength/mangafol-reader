@@ -82,9 +82,10 @@ export const TaleActions = {
     },
     headers: authHeader
   }),
-  external: async (text) => api.get("/tale/external", {
+  searchTitle: async (text, limit) => api.get("/tale/title/search", {
     params: {
-      text: text
+      text: text,
+      limit: limit
     },
     headers: authHeader
   }),
