@@ -1,5 +1,6 @@
 import { FormControl, InputGroup } from "react-bootstrap";
 import { search } from "../constants/Images";
+import { ReactComponent as SearchIcon } from "../resources/search.svg";
 import { throttle } from 'throttle-debounce';
 import { Dropdown } from "react-bootstrap";
 import { useState } from "react";
@@ -57,7 +58,7 @@ function Search(props) {
   const filterBy = () => true;
 
   return (
-    <div className="w-100">
+    <InputGroup>
       <AsyncTypeahead
         filterBy={filterBy}
         id="async-search-ow"
@@ -85,8 +86,8 @@ function Search(props) {
           </Fragment>
         )}
       />
-      {/* <img alt="" src={search} width="16" height="16" className="d-inline-block align-middle" /> */}
-    </div>
+      <InputGroup.Text id="basic-addon1"><SearchIcon width="16px" height="16px" /></InputGroup.Text>
+    </InputGroup>
   )
 
   // return (
