@@ -73,6 +73,7 @@ export default class TaleDetails extends Component {
   }
 
   onChapterUpdate = (e) => {
+
     if (e.key === undefined || e.key === 'Enter') {
       this.updateTale('Cập nhật chương truyện ' + this.state.tale.chapter,
         { chapter: this.state.tale.chapter });
@@ -80,6 +81,7 @@ export default class TaleDetails extends Component {
   };
 
   onChapterChange = (e) => {
+    console.log("Chapter change", e);
     this.setState({
       tale: {
         ...this.state.tale,

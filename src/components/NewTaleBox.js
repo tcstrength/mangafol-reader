@@ -33,6 +33,12 @@ function NewTaleBox(props) {
     }
   }
 
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleSubmit(e);
+    }
+  }
+
   return (
     <Card className="p-0 mb-3">
       <Card.Body className="text-center">
@@ -50,6 +56,7 @@ function NewTaleBox(props) {
               searchText="Đang tìm..."
               minLength={1}
               onSearch={handleSearch}
+              onKeyDown={handleKeyDown}
               options={options}
               placeholder="Tên truyện mới..."
               renderMenuItemChildren={(option, props) => (

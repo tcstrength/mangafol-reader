@@ -16,6 +16,7 @@ import Loading from "./Loading";
 import { timeSince } from "../utils/DateUtils";
 import { urlify } from "../utils/UrlUtils";
 import { useState } from "react";
+import TaleReadingPopup from "./TaleReadingPopup";
 
 function TaleDetailsView(props) {
   const tale = props.tale;
@@ -24,6 +25,7 @@ function TaleDetailsView(props) {
   const [showLinkGuid, setShowLinkGuid] = useState(false)
   const [readingStatusOptionsShow, setReadingStatusOptionsShow] = useState(false)
   const [taleFinishedOptionsShow, setTaleFinishedOptionsShow] = useState(false)
+  const [showReadingPopup, setShowReadingPopup] = useState(false)
 
   const transferDescription = (description) => {
     if (description === '') {
@@ -134,7 +136,7 @@ function TaleDetailsView(props) {
     )
   }
 
-  var readNowBtn = <a href={tale.linkDisplay} target="_blank" className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
+  var readNowBtn = <a href="javascript:void(0)" onClick={() => { setShowReadingPopup(true) }} className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
 
   if (tale.linkDisplay === '') {
     readNowBtn = <a href="javascript:void(0)" onClick={() => { setShowLinkGuid(true) }} className="btn btn-primary"><SendIcon className="mb-1" fill="#FFF" width="16" height="16" /> Đọc ngay</a>
@@ -142,6 +144,14 @@ function TaleDetailsView(props) {
 
   return (
     <>
+      <TaleReadingPopup
+        tale={tale}
+        show={showReadingPopup}
+        onChange={props.onChapterChange}
+        onUpdate={props.onChapterUpdate}
+        onHide={() => { setShowReadingPopup(false); props.onChapterUpdate({}) }}
+      />
+
       <Dialog show={showLinkGuid}
         onHide={() => { setShowLinkGuid(false) }}
         title="Chưa có link pattern"
@@ -151,6 +161,7 @@ function TaleDetailsView(props) {
         ptext="Đã hiểu"
         plink=""
       />
+
       <Row>
         <Col md={4}>
           <img
