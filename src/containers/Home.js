@@ -26,7 +26,7 @@ export default class Home extends Component {
       topLimit: 5,
       topLoading: false,
       offset: -1,
-      limit: 24,
+      limit: 96,
       reachEnd: false
     }
   }
