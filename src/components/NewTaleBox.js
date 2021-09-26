@@ -39,6 +39,12 @@ function NewTaleBox(props) {
     }
   }
 
+  const handleChange = (value) => {
+    const title = value[0].title
+    // console.log(tale)
+    props.onTitleChange({ target: { value: title } });
+  }
+
   return (
     <Card className="p-0 mb-3">
       <Card.Body className="text-center">
@@ -57,6 +63,7 @@ function NewTaleBox(props) {
               minLength={1}
               onSearch={handleSearch}
               onKeyDown={handleKeyDown}
+              onChange={handleChange}
               options={options}
               placeholder="Tên truyện mới..."
               renderMenuItemChildren={(option, props) => (
